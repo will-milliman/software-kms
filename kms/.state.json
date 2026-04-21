@@ -12,6 +12,12 @@
       "defaultBranch": "main",
       "lastPulledAt": "2026-04-21T17:30:00Z",
       "lastPulledSha": "1e012e3b278540f4db9c29e12d6bae94e0252ffa"
+    },
+    "Frontend.Foundations.IntegrateCoreUI": {
+      "seededAt": "2026-04-21T13:10:29Z",
+      "defaultBranch": "main",
+      "lastPulledAt": "2026-04-21T13:10:29Z",
+      "lastPulledSha": "6bae04b06b3b54ece656a43593b7de9e332719d5"
     }
   }
 }
