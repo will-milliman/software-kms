@@ -6,6 +6,12 @@
       "defaultBranch": "main",
       "lastPulledAt": "2026-04-21T11:56:18Z",
       "lastPulledSha": "32d32d528a7356e5f4bf4eaa4de84ac589cd93af"
+    },
+    "rainier": {
+      "seededAt": "2026-04-21T17:30:00Z",
+      "defaultBranch": "main",
+      "lastPulledAt": "2026-04-21T17:30:00Z",
+      "lastPulledSha": "1e012e3b278540f4db9c29e12d6bae94e0252ffa"
     }
   }
 }
