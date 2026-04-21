@@ -24,6 +24,12 @@
       "defaultBranch": "main",
       "lastPulledAt": "2026-04-21T20:00:00Z",
       "lastPulledSha": "df3aa582da26260b01d596cf00cec95ba3dc456a"
+    },
+    "rainier.releases": {
+      "seededAt": "2026-04-21T21:00:00Z",
+      "defaultBranch": "main",
+      "lastPulledAt": "2026-04-21T21:00:00Z",
+      "lastPulledSha": "c4c0c58552f1ffc0736521189dd8082e6d1abaca"
     }
   }
 }
