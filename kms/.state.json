@@ -18,6 +18,12 @@
       "defaultBranch": "main",
       "lastPulledAt": "2026-04-21T13:10:29Z",
       "lastPulledSha": "6bae04b06b3b54ece656a43593b7de9e332719d5"
+    },
+    "app.foundations.trafficmanagement": {
+      "seededAt": "2026-04-21T20:00:00Z",
+      "defaultBranch": "main",
+      "lastPulledAt": "2026-04-21T20:00:00Z",
+      "lastPulledSha": "df3aa582da26260b01d596cf00cec95ba3dc456a"
     }
   }
 }
