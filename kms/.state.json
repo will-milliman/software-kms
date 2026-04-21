@@ -1,0 +1,11 @@
+{
+  "org": "milliman-lts",
+  "repos": {
+    "integrate.SaaS.foundations": {
+      "seededAt": "2026-04-21T11:56:18Z",
+      "defaultBranch": "main",
+      "lastPulledAt": "2026-04-21T11:56:18Z",
+      "lastPulledSha": "32d32d528a7356e5f4bf4eaa4de84ac589cd93af"
+    }
+  }
+}
