@@ -30,6 +30,12 @@
       "defaultBranch": "main",
       "lastPulledAt": "2026-04-21T21:00:00Z",
       "lastPulledSha": "c4c0c58552f1ffc0736521189dd8082e6d1abaca"
+    },
+    "api.foundations": {
+      "seededAt": "2026-04-21T21:45:00Z",
+      "defaultBranch": "main",
+      "lastPulledAt": "2026-04-21T21:45:00Z",
+      "lastPulledSha": "e122068a309577ab9d5da4f02ac50b13e23995d1"
     }
   }
 }
