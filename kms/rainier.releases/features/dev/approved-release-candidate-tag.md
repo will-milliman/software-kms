@@ -10,7 +10,7 @@ After artifacts publish successfully, the `TagBuild` stage writes the `ApprovedR
 
 ## Behavior
 
-- Runs on the `server` pool.
+- Runs on the `ubuntu-latest` Microsoft-hosted agent pool (previously `server`; switched in PR #11 so the script can execute).
 - Single pwsh step: `Write-Host "##vso[build.addbuildtag]ApprovedReleaseCandidate"`.
 - Depends on `PublishDeploymentArtifacts` with `condition: succeeded()` — tagging only happens if the artifacts actually exist, which protects downstream consumers.
 
@@ -31,3 +31,5 @@ After artifacts publish successfully, the `TagBuild` stage writes the `ApprovedR
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-21: PR #11 Switch integrate-release-approvals pipeline job to ubuntu-latest pool (AB#91350) — `TagBuild` stage now runs on `ubuntu-latest` (was agentless `server`) so the tag-emitting pwsh script can execute.
+- 2026-04-22: PR #13 Log all component versions before approvals (AB#91392) — `TagBuild` marked `isSkippable: false`.

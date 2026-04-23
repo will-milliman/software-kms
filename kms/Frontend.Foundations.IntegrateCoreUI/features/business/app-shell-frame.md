@@ -14,6 +14,8 @@ The outer chrome shared by Integrate applications: a Carbon-based `Header`, coll
 - A left-side SideNav exposes major sections (e.g., Projects, Job history, Tenant Manager, Theme Builder in sandbox-01).
 - Selecting a side-nav item opens the corresponding resource in the Tabbed Resources area; users can switch, pin, and close tabs.
 - A Toolbox panel on the right shows tools relevant to the active resource; users can collapse it or drag the split via `react-resizable-panels`.
+- `HelpMenu` is a standard Carbon `OverflowMenu` (the previous hover popover wrapper and Milliman-specific overrides have been dropped).
+- `VersionCopyright` uses Carbon label tokens for typography.
 
 ## Entry Points
 
@@ -23,7 +25,7 @@ The outer chrome shared by Integrate applications: a Carbon-based `Header`, coll
 - `packages/frame/src/toolbox/` — `Toolbox`, `ToolboxTabs`, `ToolboxList`.
 - `packages/frame/src/toggle-toolbox/` — `ToggleToolbox`.
 - `packages/frame/src/tabbed-resources/` — `TabbedResources`, `TabbedResourcesMenu`.
-- `packages/frame/src/help-menu/` — `HelpMenu`.
+- `packages/frame/src/help-menu/` — `HelpMenu` (Carbon `OverflowMenu`).
 - `packages/frame/src/theme-toggle/` — `ThemeToggle`.
 - `packages/frame/src/window-controls/` — `WindowControls`.
 - `packages/frame/src/sign-out/` — `SignOut`.
@@ -51,3 +53,4 @@ The outer chrome shared by Integrate applications: a Carbon-based `Header`, coll
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — `HelpMenu` simplified to standard Carbon `OverflowMenu`; `VersionCopyright` switched to Carbon label tokens; `@integrate-core-ui/frame` bumped to 7.1.0.

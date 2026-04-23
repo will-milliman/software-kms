@@ -15,8 +15,8 @@
   - `-Pat` — pass `$(System.AccessToken)` from the task.
   - `-ReleaseType` — `Server` or `Client` (`ValidateSet`). Determines default artifact path.
 - Optional parameters:
-  - `-RunPipelineScriptPath` — defaults to `./integrate.Environments/.pipelines/release-process/scripts/Run-Pipeline.ps1`.
-  - `-ReleaseBodyPath` — defaults to `$SYSTEM_ARTIFACTSDIRECTORY/_Integrate App Approvals/<type>-release-body/<type>-release-body.json`.
+  - `-RunPipelineScriptPath` — resolved at runtime via `$env:SYSTEM_ARTIFACTSDIRECTORY` (consistent with `-ReleaseBodyPath`); throws a terminating error if `SYSTEM_ARTIFACTSDIRECTORY` is unset and no explicit path is provided.
+  - `-ReleaseBodyPath` — defaults to `$SYSTEM_ARTIFACTSDIRECTORY/Integrate App Approvals/<type>-release-body/<type>-release-body.json`.
 - Fails fast with a typed `ErrorRecord` (`MissingReleaseBodyArtifact`, `ObjectNotFound`) if the artifact is missing, including a hint that pipeline 799 may not have completed.
 - Adds two properties to the deserialized release body:
   - `resources.repositories.self.refName = $env:PIPELINERUNBRANCH`.
@@ -37,7 +37,7 @@
 
 - `Run-Pipeline.ps1` from `integrate.Environments` — actually POSTs to ADO to create the pipeline run.
 - Classic Release env vars: `PIPELINERUNBRANCH`, `CREATERELEASEPIPELINEID`, `PRODUCT`, `RELEASE_RELEASENAME`, `RELEASE_RELEASEID`, `RELEASE_ENVIRONMENTID`, `SYSTEM_ARTIFACTSDIRECTORY`.
-- Artifact alias `_Integrate App Approvals` configured on the Classic Release.
+- Artifact alias `Integrate App Approvals` configured on the Classic Release.
 
 ## Related Features
 
@@ -47,3 +47,4 @@
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-21: PR #12 Fix artifact alias and script path resolution in Invoke-IntegrateRelease (AB#91079) — corrected artifact alias from `_Integrate App Approvals` to `Integrate App Approvals`; replaced hardcoded `-RunPipelineScriptPath` default with runtime resolution via `$env:SYSTEM_ARTIFACTSDIRECTORY`; added explicit terminating errors when `SYSTEM_ARTIFACTSDIRECTORY` is unset and no explicit path is provided.

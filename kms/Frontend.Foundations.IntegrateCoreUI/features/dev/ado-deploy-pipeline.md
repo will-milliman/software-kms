@@ -14,7 +14,7 @@ Azure DevOps pipeline `pipelines/deploy.yml` triggered by the successful complet
 - **Stage 1 — `Publish_IntegrateCoreUiNext`** (ubuntu-latest, `:19-87`)
   - Install + build full pnpm workspace + `idm-adapter`.
   - `npm@1` task with `customFeed: rainier-latest` and `command: publish` via `pnpm run publish:feed` (`:75-76`).
-  - Separately publishes `idm-adapter` via `tools/publish-feed.ts` against its dist output (`:86-87`).
+  - Separately publishes `idm-adapter` via a single `npm@1` task scoped to `packages/idm-adapter` with `workingDir`, matching the pattern used for the other workspace packages above. (Previous 3-step copy/auth/publish sequence was replaced because `npm publish <path>` reads `.npmrc` from cwd, not `<path>`, causing auth to resolve against the root `.npmrc`.)
 - **Stage 2 — `Deploy_Static_Webpages`** (windows-latest, `:89-155`)
   - Build Storybook (`pnpm --filter storybook-host run storybook:build`) → `AzureFileCopy@3` to `ltssharedassets/$web/IntegrateCoreUiNext/storybook`.
   - Build `sandbox-01` (`pnpm --filter sandbox-01 run build`) → `AzureFileCopy@3` to `ltssharedassets/$web/IntegrateCoreUiNext/web`.
@@ -27,7 +27,7 @@ Azure DevOps pipeline `pipelines/deploy.yml` triggered by the successful complet
 - `pipelines/deploy.yml:1` — triggers + pipeline resource declaration.
 - `pipelines/deploy.yml:19-87` — `Publish_IntegrateCoreUiNext`.
 - `pipelines/deploy.yml:75-76` — feed publish step.
-- `pipelines/deploy.yml:86-87` — idm-adapter publish via `publish-feed.ts`.
+- `pipelines/deploy.yml` — idm-adapter publish via `npm@1` with `workingDir: packages/idm-adapter`.
 - `pipelines/deploy.yml:89-155` — `Deploy_Static_Webpages`.
 - `pipelines/deploy.yml:134` — Storybook upload path.
 - `pipelines/deploy.yml:157-205` — `Deploy_CookieConsent`.
@@ -49,3 +49,4 @@ Azure DevOps pipeline `pipelines/deploy.yml` triggered by the successful complet
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-23: PR #166 fix: publish idm-adapter via npm@1 task with feed auth — replaced the 3-step copy/auth/publish sequence with a single `npm@1` task scoped via `workingDir: packages/idm-adapter`, fixing feed auth resolution.

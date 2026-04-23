@@ -34,3 +34,4 @@ A single `ssl-cert-spoke` Terraform stack ships to multiple environments (`apide
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-22: PR #34 chore(AB#91000): adding the plt-integrate-solutions.com SSL cert to the api spoke keyvault — added cert entry to `ssl-cert-spoke/configuration/apidev.json`.

@@ -15,6 +15,7 @@ React-context-based state library that provides tab stores for `TabbedResources`
   - `addTab / removeTab / updateTab / activateTab / pinTab / unpinTab / setVisible / setContainerIndex`.
 - Domain wrappers alias the hook names: `useTabbedResources() → { addResource, ... }`, `useToolbox() → { addTool, ... }`.
 - Per-tab contexts (`ResourceContext`, `ToolContext`) let descendants of a tab's subtree read the active tab via `useResource()` / `useTool()`.
+- `updateActiveByIndex` updates synchronously by id and guards out-of-range indices.
 - Although the package declares `react-redux` / `@reduxjs/toolkit` as peer dependencies, the source currently uses only React context — the Redux declaration is legacy or anticipatory.
 
 ## Entry Points
@@ -41,3 +42,4 @@ React-context-based state library that provides tab stores for `TabbedResources`
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — `updateActiveByIndex` in `createTabContext` now updates synchronously by id and guards out-of-range indices.

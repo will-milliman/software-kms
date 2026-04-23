@@ -14,7 +14,8 @@ Published library that delivers the Milliman-branded Carbon themes (`milliman-wh
 - `useGlobalTheme()` exposes `{ theme, setTheme }`.
 - `InlineThemeProvider` (alias `IcuInlineThemeProvider`) scopes a subtree to the alternate theme without touching the root.
 - `MillimanThemes` enum lists supported themes.
-- `AgGridThemeContext` / `AgGridTreeThemeContext` + `useAgGridTheme` / `useAgGridTreeTheme` expose Quartz theme objects (`white`, `whiteTree`, `g100`, `g100Tree`) built via `themeQuartz.withParams({...})` against Carbon CSS variables — grid retheming happens automatically when Carbon theme toggles.
+- `AgGridThemeContext` / `AgGridTreeThemeContext` + `useAgGridTheme` / `useAgGridTreeTheme` expose Quartz theme objects (`white`, `whiteTree`, `g100`, `g100Tree`) built via `themeQuartz.withParams({...})` against Carbon CSS variables — grid retheming happens automatically when Carbon theme toggles. Milliman ag-grid themes use `--cds-text-primary` for foreground; the default `AgGridNoRowsOverlay` background uses `--cds-layer`.
+- Milliman G100 v2 token refresh applied to `themes.scss`; the legacy `variables.scss` has been removed.
 - Publishes a `./icu.css` export (renamed at build time via `rollup.output.assetFileNames`) alongside the JS entry.
 - Shared type packages: `CarbonIconName` and the `styled-components` `DefaultTheme` augmentation.
 
@@ -43,3 +44,4 @@ Published library that delivers the Milliman-branded Carbon themes (`milliman-wh
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — Milliman G100 v2 token refresh applied; removed `variables.scss`; ag-grid uses `--cds-text-primary` and `--cds-layer`; `@integrate-core-ui/themes` bumped to 4.0.0 and `@integrate-core-ui/grid` to 2.0.1.

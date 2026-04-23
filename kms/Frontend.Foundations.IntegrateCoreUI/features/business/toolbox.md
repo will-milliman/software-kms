@@ -15,6 +15,8 @@ A collapsible side panel that exposes contextual "tools" for the currently activ
 - A `ToolContext` provided to each tool's subtree (via `useTool()`) exposes the active tool.
 - Tools support pin, visibility toggling, and container indexing for multi-column layouts; state is driven by `createTabContext` in `@integrate-core-ui/store`.
 - The split between content region and toolbox is resizable via `react-resizable-panels`.
+- `Toolbox` and `ToolboxTabs` use a proper flex layout with a fixed viewport height so individual tab panels scroll independently.
+- Non-visible toolbox tabs stay mounted (hidden) so their effects continue to run; guards skip rendering when the active resource is undefined.
 
 ## Entry Points
 
@@ -38,3 +40,4 @@ A collapsible side panel that exposes contextual "tools" for the currently activ
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — `Toolbox`/`ToolboxTabs` reworked to flex layout with fixed viewport height; non-visible tabs stay mounted so effects still run; `@integrate-core-ui/frame` bumped to 7.1.0.

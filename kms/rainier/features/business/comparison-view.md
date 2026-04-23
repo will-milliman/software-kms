@@ -17,6 +17,7 @@ Side-by-side comparison of two project/branch/commit states to visualize differe
 
 - UI:
   - `monorepo/desktop/ui/packages/project-manager/src/components/project-manager/comparison/comparison-view.tsx`.
+  - `monorepo/model-development/src/Server/WebSite/ReactApps/Shared/hooks/use-current-version-history-details.ts` — reads `commitId` from query params; treats both `null` and the literal string `"null"` as missing so first-commit-on-branch compare URLs (where MMD serializes `null` as the string) no longer hang on a perpetual spinner (PR #9610, AB#90935).
 
 ## Key Dependencies
 
@@ -30,3 +31,4 @@ Side-by-side comparison of two project/branch/commit states to visualize differe
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-22: PR #9610 AB#90935 check for 'null' string serialization in compare page hook — fixes perpetual spinner when comparing the first commit on a branch (mmd API serializes a null commitId as the string "null").

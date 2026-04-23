@@ -14,6 +14,7 @@ Auth-server services share a consistent **Data Protection** setup: the ASP.NET D
 - Each service has its own session container: `auth-sessions`, `portal-sessions`, `sample-sessions`.
 - Dev certs generated via mkcert (`.dpapi-certs/`) at AppHost startup; production certs come from Azure Key Vault / managed identity.
 - `Integrate.SaaS.AuthServer.Client.Authentication.TicketStore` implements `ITicketStore` over Azure Blob.
+- `HttpResponseExtensions.CreatePersistentCookie` issues "remember me" cookies: it requires an explicit expiration and current time, enforces a 4096-byte max size, and throws on invalid / oversized input. The IssuerService's `TenantController` reads `IssuerServiceOptions.RememberMeCookieExpiration` so the remember-me lifetime is configuration-driven instead of hard-coded.
 - `auth-server/docs/AUTHENTICATION_COOKIE_CONFIGURATION.md` is the canonical reference for cookie properties, expiration, security, localhost behavior, DevTools visibility, and troubleshooting.
 
 ## Entry Points
@@ -21,6 +22,8 @@ Auth-server services share a consistent **Data Protection** setup: the ASP.NET D
 - `auth-server/src/Integrate.SaaS.AuthServer.Client/Authentication/TicketStore.cs`.
 - `auth-server/src/Integrate.SaaS.AuthServer.IssuerService/Program.cs:1-101` — DPAPI + cookie wiring.
 - `auth-server/src/Integrate.SaaS.AuthServer.PortalService/Program.cs:1-158` — DPAPI + ticket store wiring.
+- `auth-server/src/Integrate.SaaS.AuthServer/Extensions/HttpResponseExtensions.cs` — `CreatePersistentCookie` + `BuildSecureCookieOptions` helpers used for remember-me cookies.
+- `auth-server/src/Integrate.SaaS.AuthServer/Configuration/IssuerServiceOptions.cs` — `RememberMeCookieExpiration` option consumed by `TenantController`.
 - `auth-server/docs/AUTHENTICATION_COOKIE_CONFIGURATION.md` — ~3100-line guide.
 - `auth-server/src/Integrate.SaaS.AuthServer.AppHost/DevCertificateExtensions.cs` — dev certs.
 
@@ -38,3 +41,4 @@ Auth-server services share a consistent **Data Protection** setup: the ASP.NET D
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-22: PR #376 AB#89807 Enhance persistent cookie creation with customizable expiration — `CreatePersistentCookie` now requires explicit expiration/current-time and enforces a 4096-byte cap; new `IssuerServiceOptions.RememberMeCookieExpiration` drives remember-me lifetime from config; added `HttpResponseExtensionsTests`.

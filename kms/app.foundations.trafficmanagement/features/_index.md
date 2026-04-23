@@ -15,6 +15,7 @@ User- and consumer-team-visible capabilities.
 | [Cert Lifecycle Observability](business/cert-lifecycle-observability.md) | Sentinel + Log Analytics + metric alerts on every KV and function. |
 | [Multi-Environment Spoke Provisioning](business/multi-env-spoke-provisioning.md) | Ship the spoke to `apidev`, `dev`, `gitopsdev`, `gitopsprod` (and any new env) via config-only changes. |
 | [Spoke Onboarding Runbook](business/spoke-onboarding-runbook.md) | Documented procedure to register a new spoke with the hub for cert distribution. |
+| [Networking Spike (Hub-and-Spoke VNet Topology)](business/networking-spike.md) | Spike stack and reusable modules proving out a multi-subscription hub-and-spoke VNet topology for API Ingress. |
 
 ## Dev features
 

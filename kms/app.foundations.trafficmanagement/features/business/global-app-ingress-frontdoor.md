@@ -14,6 +14,7 @@ A shared Azure Front Door **Premium** profile that acts as the global edge in fr
 - Uses a user-assigned managed identity (integration with cert/secret sources when wired).
 - Diagnostic settings stream to Log Analytics (`afd_diagnostics.tf`).
 - The stack is intentionally minimal today — README flags "TODO add IaC build badge" and the stack is marked Incubating.
+- The AFD user-assigned identity is granted **Key Vault Secrets User** on the SSL cert vault (per-env, configured via `ssl_kv_*` variables in `afd.tf` / `variables.tf`) so Front Door can pull TLS certs.
 
 ## Entry Points
 
@@ -35,3 +36,6 @@ A shared Azure Front Door **Premium** profile that acts as the global edge in fr
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-21: PR #24 Resolve issue with terraform output.json file not being generated — fixed `global-app-ingress/deploy/outputs.tf` and bumped `cicd-shared` submodule pointer.
+- 2026-04-21: PR #31 Extend the global ingress to grant the AFD identity permissions to the ssl kv (AB#90486) — added KV-secrets role assignment for the AFD identity in `afd.tf`, plus new `variables.tf` inputs and `configuration/dev.json` settings for the SSL KV reference.
+- 2026-04-22: PR #35 Correct how the principal id is set for the role assignment (AB#90486) — fixed AFD identity principal id wiring in `afd.tf`.

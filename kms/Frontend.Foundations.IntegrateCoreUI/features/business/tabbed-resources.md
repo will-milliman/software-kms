@@ -15,6 +15,7 @@ A tab bar at the top of the content region where users open, switch between, pin
 - Tabs can be pinned (persisted visually on the left) or closed.
 - A `TabbedResourcesMenu` provides overflow access when tabs exceed visible width.
 - Resource visibility, active state, and container index are driven by the `TabItem` record managed by `createTabContext`.
+- The component uses a proper flex layout with a fixed viewport height so panel content scrolls independently of the tab bar.
 
 ## Entry Points
 
@@ -38,3 +39,4 @@ A tab bar at the top of the content region where users open, switch between, pin
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — `TabbedResources` reworked to flex layout with fixed viewport height for independent panel scrolling; `@integrate-core-ui/frame` bumped to 7.1.0.

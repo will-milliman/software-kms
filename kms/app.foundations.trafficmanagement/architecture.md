@@ -127,6 +127,16 @@ flowchart TB
 - **Make prefix:** `gai__`.
 - **Pipeline:** `.pipelines/infra-deploy.yaml`.
 
+### `spike-networking/` — Hub-and-spoke VNet topology spike
+
+- **Status:** Spike (incubating, added 2026-04-23).
+- **Root modules:** `spike-networking/deploy/{main,provider,variables,outputs,tags}.tf`, `make.mk`.
+- **What it creates:** a hub VNet plus per-foundation spoke VNets (api-foundations, connectivity-foundations, global-services), bi-directional VNet peering, and shared private DNS zones — all deployed across multiple subscriptions for the API Ingress initiative (AB#90473, AB#90486).
+- **Configuration:** `spike-networking/configuration/{api-foundations-dev,connectivity-foundations-dev,global-services-dev}.json` and `backend.hcl`.
+- **Pipeline:** `spike-networking/.pipelines/infra-cd.yaml`.
+- **Helpers:** `plan-spike.sh`, `validate-spike.sh`, `Makefile` targets.
+- See feature: [Networking Spike](features/business/networking-spike.md).
+
 ## Shared modules
 
 ### `shared/modules/KeyVault/`
@@ -153,6 +163,20 @@ flowchart TB
   - Metric alerts (`metric_alerts.tf`) for failures, HTTP 5xx, memory.
   - Storage RBAC auto-granted to the function MI (`function_app_keys.tf`).
 - Used by the DCV Watchdog and both CertSync functions.
+
+### Networking spike modules (added 2026-04-23)
+
+The networking spike introduces composable VNet primitives under `shared/modules/`:
+
+- `network/` — top-level network composition; instantiates hub VNet, spoke VNets, peering, and private DNS links.
+- `network-topology/` — orchestrator that ties together hub + N spokes (drives spoke deployment via for_each).
+- `hub-vnet/` — hub virtual network primitive.
+- `spoke-vnet/` — spoke virtual network primitive with private DNS zone link inputs.
+- `vnet-peering/` — bidirectional VNet peering primitive.
+- `private-dns/` — private DNS zones + VNet links.
+- `subscriptions/` — subscription map / lookup (`subscription-map.json`).
+
+See feature: [Networking Spike](features/business/networking-spike.md).
 
 ## Per-env configuration
 

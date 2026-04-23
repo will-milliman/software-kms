@@ -39,3 +39,4 @@ Certificates issued or renewed in the central (hub) Key Vault are automatically 
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-04-21: PR #30 fix(AB#91000): corrected typo in the key vault cert user role — fixed role name in `domain-management/deploy/spoke_permissions.tf`.

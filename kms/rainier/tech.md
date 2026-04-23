@@ -17,6 +17,7 @@
 
 - **Node:** v18.x (`nvm use 18`).
 - **Package manager:** **pnpm 9.15.4** with `pnpm-workspace.yaml` at `monorepo/desktop/ui/pnpm-workspace.yaml:1`.
+- **Workspace path aliases:** as of PR #9607, `tsconfig.root.json` no longer maps `@repo/store/*` and `@repo/store/config/*`. Internal `packages/store` files use relative imports; external consumers (`apps/web`, `packages/project-manager`) import via `@repo/store/src/*` and rely on the existing `workspace:*` pnpm dependency for resolution.
 - **Framework:** React 19, Vite 6, Electron 34, Redux Toolkit 2.5, RTK Query.
 - **Design system:** Carbon Design System wrapped by `@repo/components`.
 - **Testing:** Playwright (E2E at `monorepo/desktop/ui/e2e/electron/`), Jest.
@@ -80,6 +81,7 @@
 | `Hellang.Middleware.ProblemDetails` | RFC 7807 problem+json. |
 | `Swashbuckle` / `NSwag` | OpenAPI doc + client gen. |
 | `Asp.Versioning` | API versioning in RunManager. |
+| `MessagePack` (v3) | Binary serialization in `Milliman.MGAlfa.Core` (Adb2/Ain2/Atb2 internal node types, key structures). Upgraded from v2 to v3 in PR #9574 with Roslyn-based source-generation suppressed for parity; perf tuning tracked separately. |
 | `Milliman.Desktop.CalcEngine` | Calc engine binaries (Nuget bundles in `src/server/Rainier.RunManager/CalcEngine-bundles/`). |
 | `@carbon/react` | Design system base. |
 | `electron-builder` | NSIS installer, code-signing via `code-signing.cjs`. |
