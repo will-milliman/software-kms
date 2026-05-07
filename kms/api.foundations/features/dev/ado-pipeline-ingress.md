@@ -41,3 +41,4 @@
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #5 Extend the api ingress spike further to include created the private endpoint between the AFD and APIM — ingress pipeline and configuration files were updated for the expanded APIM/AFD private endpoint spike.

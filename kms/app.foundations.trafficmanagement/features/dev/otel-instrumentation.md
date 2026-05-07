@@ -13,6 +13,7 @@ Both Python function apps use `azure-monitor-opentelemetry` for auto-instrumenta
 - `azure-monitor-opentelemetry` is added to `requirements.txt` and initialized at function cold start (picks up `APPLICATIONINSIGHTS_CONNECTION_STRING`).
 - The `@traced` decorator wraps handler + action entry points to produce named spans (e.g. `dcv.handler.execute`, `dcv.action.submit_validation`), attaching the domain name as a span attribute.
 - Spans flow to the per-env Application Insights instance provisioned by the shared flex-function module.
+- CertSync also emits custom metrics/spans from both event and full-sync handlers through shared instrumentation helpers.
 
 ## Entry Points
 
@@ -34,3 +35,7 @@ Both Python function apps use `azure-monitor-opentelemetry` for auto-instrumenta
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #55 chore(AB#91000): adding some otel to the sync function — added cert-sync OpenTelemetry configuration, metrics helpers, handler instrumentation, and tests.
+- 2026-05-07: PR #56 chore(AB#91000): adding some proactive alerting — introduced a dedicated observability stack with action groups, alert rules, backend config, make targets, and validation.
+- 2026-05-07: PR #65 Observability — moved alerting closer to the domain-management and ssl-cert-spoke stacks and refactored shared secret-age alerting.
+- 2026-05-07: PR #66 refactor(AB#91000): removing the dependency on long retention LAW logs for secret age alerting — removed the LAW-based secret-age alert module pending a function-based replacement.

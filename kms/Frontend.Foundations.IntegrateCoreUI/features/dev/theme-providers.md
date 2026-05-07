@@ -6,14 +6,14 @@
 
 ## Summary
 
-Published library that delivers the Milliman-branded Carbon themes (`milliman-white`, `milliman-g100`), global and inline theme providers, themed AG Grid Quartz themes, and shared TypeScript type declarations.
+Published library that delivers the Milliman-branded Carbon themes (`milliman-white`, `milliman-g100`, plus `*-new` variants), global and inline theme providers, themed AG Grid Quartz themes, and shared TypeScript type declarations.
 
 ## Behavior
 
 - `GlobalThemeProvider` (alias `IcuGlobalThemeProvider`) wraps the whole app, persists the active theme in `localStorage['milliman-theme']`, and mirrors the choice to `document.documentElement.dataset.carbonTheme` so Carbon CSS variables apply globally. Falls back to `prefers-color-scheme` when nothing is persisted.
 - `useGlobalTheme()` exposes `{ theme, setTheme }`.
 - `InlineThemeProvider` (alias `IcuInlineThemeProvider`) scopes a subtree to the alternate theme without touching the root.
-- `MillimanThemes` enum lists supported themes.
+- `MillimanThemes` enum lists supported themes, including `WHITE_NEW` and `G100_NEW` for consumers migrating toward newer token values.
 - `AgGridThemeContext` / `AgGridTreeThemeContext` + `useAgGridTheme` / `useAgGridTreeTheme` expose Quartz theme objects (`white`, `whiteTree`, `g100`, `g100Tree`) built via `themeQuartz.withParams({...})` against Carbon CSS variables — grid retheming happens automatically when Carbon theme toggles. Milliman ag-grid themes use `--cds-text-primary` for foreground; the default `AgGridNoRowsOverlay` background uses `--cds-layer`.
 - Milliman G100 v2 token refresh applied to `themes.scss`; the legacy `variables.scss` has been removed.
 - Publishes a `./icu.css` export (renamed at build time via `rollup.output.assetFileNames`) alongside the JS entry.
@@ -45,3 +45,5 @@ Published library that delivers the Milliman-branded Carbon themes (`milliman-wh
 
 - 2026-04-21: Seeded.
 - 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — Milliman G100 v2 token refresh applied; removed `variables.scss`; ag-grid uses `--cds-text-primary` and `--cds-layer`; `@integrate-core-ui/themes` bumped to 4.0.0 and `@integrate-core-ui/grid` to 2.0.1.
+- 2026-05-07: PR #171 Migrate AG Grid from v32.3.9 to v35.2.1 — theme package updated AG Grid Quartz mappings for v35 unified packages and bumped `@integrate-core-ui/themes` to 4.1.0.
+- 2026-05-07: PR #173 Reintroduce v3 theme tokens and rename v4 themes to *-new variants — restored v3-aligned tokens under default Milliman theme names, moved v4 tokens to `milliman-white-new` / `milliman-g100-new`, and bumped themes to 5.0.0.

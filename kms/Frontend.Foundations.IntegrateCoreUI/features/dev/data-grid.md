@@ -16,7 +16,7 @@ AG Grid Enterprise wrapper themed for Milliman/Carbon, with built-in quick filte
   - Exposes the grid APIs through `AgGridApisContext`, so `useAgGridContext()` in descendants can read `columnApi`, `api`, and quick-filter callbacks.
   - Uses `useImperativeHandle` so parent refs see the underlying `AgGridReact` ref.
 - `<AgGridQuickFilter>` and `<AgGridNoRowsOverlay>` provide drop-in UX pieces.
-- Exports `ag-grid.modules` — the canonical module list consumers should register (clipboard, column-tool-panel, menu, range-selection, row-grouping, set-filter, side-bar, client-side-row-model).
+- Exports `ag-grid.modules` — the canonical module list consumers should register. The package is on AG Grid v35 unified packages and maps split menu modules plus cell selection for backwards-compatible consumer behavior.
 
 ## Entry Points
 
@@ -30,7 +30,7 @@ AG Grid Enterprise wrapper themed for Milliman/Carbon, with built-in quick filte
 
 ## Key Dependencies
 
-- `@ag-grid-community/*` and `@ag-grid-enterprise/*` (peer, >=32.0.0) — grid core + enterprise modules.
+- `ag-grid-community`, `ag-grid-enterprise`, `ag-grid-react` (peer, v35) — grid core, enterprise modules, and React binding.
 - `@carbon/react` (peer).
 - `@integrate-core-ui/themes` (peer) — Quartz theme + Carbon variable bridging.
 
@@ -42,3 +42,4 @@ AG Grid Enterprise wrapper themed for Milliman/Carbon, with built-in quick filte
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #171 Migrate AG Grid from v32.3.9 to v35.2.1 — switched from modular AG Grid packages to v35 unified packages, added CellSelectionModule, split menu modules, type re-exports, and backward-compatible wrapper defaults.

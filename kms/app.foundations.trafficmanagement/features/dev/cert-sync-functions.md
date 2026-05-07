@@ -22,6 +22,7 @@ Two Python 3.12 Azure Functions running on the spoke that keep the spoke Key Vau
 - Trigger: Timer, schedule from `%FULL_SYNC_SCHEDULE%` app setting.
 - Enumerates every cert in hub KV, compares `updated_on` against the spoke copy, syncs any that are newer or missing.
 - Safety net for missed/dropped Event Grid events.
+- Both event-driven and full-sync paths can sync to additional non-managed Key Vault targets configured outside the standard spoke stack.
 
 ### Shared
 
@@ -54,3 +55,6 @@ Two Python 3.12 Azure Functions running on the spoke that keep the spoke Key Vau
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #54 chore(AB#91000): readding in the code to wire to the LAW — cert-sync function wiring now emits to the Log Analytics/Application Insights observability path.
+- 2026-05-07: PR #55 chore(AB#91000): adding some otel to the sync function — cert-sync functions gained OpenTelemetry setup, custom metrics/spans, and instrumentation tests.
+- 2026-05-07: PR #58 feat(AB#91000): Adding capability to sync certs to non-managed key vaults — cert-sync shared logic now supports external/non-managed target vaults with config, permissions, and tests.

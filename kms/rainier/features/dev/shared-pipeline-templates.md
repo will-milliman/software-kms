@@ -32,3 +32,6 @@ Reusable Azure DevOps YAML job templates (`dotnet-build.yml`, `docker-build.yml`
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9645 Add pipeline stage template for automated release notes PRs — added a reusable `publish-release-notes-pr.yml` stage template for downstream release pipelines.
+- 2026-05-07: PR #9705 chore: reorganize pipeline tooling — moved pipeline tooling into `monorepo/tools` and standardized pipeline layouts.
+- 2026-05-07: PR #9708 chore: rename and cleanup some make file monorepo/tools — cleaned up make targets and naming under the reorganized tools area.

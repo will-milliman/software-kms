@@ -12,7 +12,7 @@ A self-hosted, hand-rolled OIDC / OAuth2 authorization server that mints access,
 
 - Exposes standard OIDC endpoints: `/authorize`, `/token`, `/.well-known/openid-configuration`, JWKS, and `/logout`.
 - Supports authorization-code flow (PKCE) as the primary grant; hybrid/implicit code paths exist per `ProtocolResponseFactory` split tests.
-- Persists authorization codes in `auth-codes` blob and refresh tokens in `auth-refresh` blob; expired records pruned by background services.
+- Persists authorization codes in `auth-codes` blob and refresh tokens in `auth-refresh` blob; storage-account lifecycle policy owns expiry cleanup rather than issuer background workers.
 - Federates upstream to Auth0 / Entra ID (prod) or Keycloak (dev) via `OpenIdConnect`.
 - Issues Milliman custom claims under `http://schemas.milliman.com/identity/claims/*` (see `domain.md`).
 - Applies OWASP security headers and cert-based data protection to session state.
@@ -45,3 +45,10 @@ A self-hosted, hand-rolled OIDC / OAuth2 authorization server that mints access,
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #392 AB#91472 fix(issuer): remove redundant RefreshTokenCleanupService registration — removed the refresh-token cleanup hosted-service registration in favor of storage lifecycle management.
+- 2026-05-07: PR #393 AB#91484 fix(issuer): remove RefreshTokenCleanupService — removed refresh-token and authorization-code cleanup services/options so lifecycle policies handle expired blobs.
+- 2026-05-07: PR #394 AB#91508 Enhance error logging and handling for authorization codes — token redemption now treats authorization codes as strictly single-use, fails if deletion fails, and logs/traces the effective client ID.
+- 2026-05-07: PR #414 AB#91708 Enhance authentication flow with diagnostics, logging, and documentation — added antiforgery failure redirects, auth redirect-loop detection, ticket-store error logging, and auth-server developer docs.
+- 2026-05-07: PR #437 AB#91963 Enhance session management with max age and renewal handling — silent renewal is denied with `login_required` when a session is too close to max age, and protocol errors map to 401 responses.
+- 2026-05-07: PR #438 AB#91971 Include max age limit in session authorization response — implicit authorization responses now include and propagate the OIDC `max_age` value.
+- 2026-05-07: PR #439 AB#91971 Fix MaxAge handling in authorization requests and responses — response building now uses request `MaxAge` when provided and otherwise falls back to the configured default.

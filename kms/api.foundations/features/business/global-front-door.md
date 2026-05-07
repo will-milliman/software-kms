@@ -38,3 +38,4 @@ Provisions an Azure Front Door **Premium** profile, endpoint, origin group, and 
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #5 Extend the api ingress spike further to include created the private endpoint between the AFD and APIM — Front Door origin/domain/route Terraform was refactored to support the AFD-to-APIM private endpoint spike.

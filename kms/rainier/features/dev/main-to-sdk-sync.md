@@ -31,3 +31,10 @@ A GitHub Action that continuously mirrors the `main` branch into the most recent
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9633 chore: sync main into release/sdk/v0.4.0 — automated sync carried main into the SDK v0.4 release branch.
+- 2026-05-07: PR #9636 chore: sync main into release/sdk/v0.4.0 — automated SDK v0.4 branch sync.
+- 2026-05-07: PR #9647 chore: sync main into release/sdk/v0.4.0 — automated SDK v0.4 branch sync.
+- 2026-05-07: PR #9656 chore: sync main into release/sdk/v0.4.0 — automated SDK v0.4 branch sync.
+- 2026-05-07: PR #9684 chore: sync main into release/sdk/v0.5.0 — automated sync started for the SDK v0.5 release branch.
+- 2026-05-07: PR #9695 chore: sync main into release/sdk/v0.5.0 — automated SDK v0.5 branch sync.
+- 2026-05-07: PR #9709 chore: sync main into release/sdk/v0.5.0 — automated SDK v0.5 branch sync.

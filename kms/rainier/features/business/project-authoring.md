@@ -15,6 +15,7 @@ The core authoring experience in Integrate: creating, organizing, and editing pr
 - Changes are tracked via edit sessions on the server; progress flows back via SignalR.
 - The header exposes action buttons for share, archive, discard changes, etc.
 - Changes in the tree are reflected live; write-lock prevents concurrent edits.
+- Long-running commands can opt out of the reader-writer lock so sync-merge no longer blocks editing when the command does not require exclusive write access.
 
 ## Entry Points
 
@@ -45,3 +46,6 @@ The core authoring experience in Integrate: creating, organizing, and editing pr
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9648 Add reference file support for scenario files — scenario-file authoring now supports reference files in the model authoring flow.
+- 2026-05-07: PR #9669 Update Add Project modal header copy — refined the project creation modal copy.
+- 2026-05-07: PR #9697 Unblock Edit during sync merge by opting long-running commands out of reader-writer lock — long-running commands can opt out of the read/write lock where safe, unblocking edits during sync merge.

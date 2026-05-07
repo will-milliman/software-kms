@@ -30,3 +30,4 @@ Shared GNU Make fragments under `shared/make/` implementing the "Three Musketeer
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9654 Add shared Makefile (Three Musketeers) targets for signalr-service — signalr-service now participates in shared make-based build targets.

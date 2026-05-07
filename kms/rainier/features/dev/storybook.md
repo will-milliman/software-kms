@@ -30,3 +30,5 @@ A Storybook catalog of Integrate's React component library with stories that dou
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9696 Add GitHub Actions workflow for Storybook GitHub Pages deployment — Storybook can now be deployed through GitHub Pages automation.
+- 2026-05-07: PR #9687 feat: add triggered qualys scan for mmd site — MMD site build flow gained a triggered Qualys scan stage.

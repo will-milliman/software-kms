@@ -47,4 +47,5 @@
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #22 Updated the invoke script to also trigger the GitHub release pipeline to enable dual running — `Invoke-IntegrateRelease.ps1` now triggers GitHub and AzDO release paths during the environments migration.
 - 2026-04-21: PR #12 Fix artifact alias and script path resolution in Invoke-IntegrateRelease (AB#91079) — corrected artifact alias from `_Integrate App Approvals` to `Integrate App Approvals`; replaced hardcoded `-RunPipelineScriptPath` default with runtime resolution via `$env:SYSTEM_ARTIFACTSDIRECTORY`; added explicit terminating errors when `SYSTEM_ARTIFACTSDIRECTORY` is unset and no explicit path is provided.

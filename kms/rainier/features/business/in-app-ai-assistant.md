@@ -32,3 +32,4 @@ An integrated chat assistant ("LAPA") inside the Integrate web renderer. Control
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9711 Integrate LAPA chat into Toolbox sidebar — LAPA chat is now surfaced in the Toolbox sidebar.

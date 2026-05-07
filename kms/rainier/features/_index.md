@@ -36,6 +36,7 @@ User- and customer-visible capabilities.
 | [Feature Toggles (user-facing)](business/feature-toggles.md) | User-controllable toggles via `feature-toggles.json`. Cross-link: [Feature Toggles (dev)](dev/feature-toggles-infrastructure.md). |
 | [Release Notes](business/release-notes.md) | Customer-facing release notes surfaced in-app. Cross-link: [Release Note Generation (dev)](dev/release-note-generation.md). |
 | [Swagger API Explorer](business/swagger-api-explorer.md) | Live API docs for Project Manager (also used by devs — see [dev](dev/swagger-api-explorer.md)). |
+| [Segments Grids](business/segments-grids.md) | Asset, liability, and reinvestment segment grids in Project Manager authoring. |
 
 ## Dev features
 
@@ -78,6 +79,7 @@ Build, CI, tooling, internal developer experience.
 | [User Docs Build (PDF)](dev/user-docs-build.md) | PS-driven PDF generation pipeline for user-facing docs. |
 | [Release Note Generation](dev/release-note-generation.md) | AI-assisted release note drafting workflow. Cross-link: [business release notes](business/release-notes.md). |
 | [Swagger API Explorer (Project Manager)](dev/swagger-api-explorer.md) | Interactive API testing at `localhost:50202/swagger`. Cross-link: [business](business/swagger-api-explorer.md). |
+| [Conversion Tools](dev/conversion-tools.md) | Generalized Excel, inforce, and scenario conversion tooling for IntegrateConvert and SDK APIs. |
 | [CODEOWNERS](dev/codeowners.md) | Per-path review ownership. |
 | [Trivy + Checkov Image Scanning](dev/image-scanning.md) | Security scanning in shared docker_image.mk. |
 | [Azurite Emulator for Tests](dev/azurite-for-tests.md) | Local Azure Storage emulator targets. |

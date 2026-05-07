@@ -15,6 +15,7 @@ Start, monitor, cancel, and retrieve results of MG-ALFA projection jobs. Support
 - Status streams back over SignalR; job history records every run.
 - Results can be downloaded per-run, batched, or per-projection.
 - User can cancel a running job; list compatible calc engines.
+- GridUtils logging preferences and run folder changes propagate into compute job execution so overridden settings are honored.
 
 ## Entry Points
 
@@ -53,3 +54,6 @@ Start, monitor, cancel, and retrieve results of MG-ALFA projection jobs. Support
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9635 Bug/91060 compute jobs ignore overridden gridutils logging — compute jobs now honor overridden GridUtils logging settings.
+- 2026-05-07: PR #9638 Trim fixed lives adjustment to provide only 10 non-zero leading digits — projection fixed-lives adjustment output is trimmed to stable significant digits.
+- 2026-05-07: PR #9659 Fix stale results folder by passing updated preferences in onFolderChanged — changed results-folder preferences now flow through to job configuration.

@@ -47,6 +47,7 @@ Features for `integrate.SaaS.foundations`. "Business" features are user/customer
 | [Blazor Sample Client](./dev/blazor-sample-client.md) | Reference Blazor Server OIDC client (`Integrate.SaaS.AuthServer.SampleApp`). |
 | [Hono Mock API](./dev/hono-mock-api.md) | Dockerised TypeScript mock API used by integration + E2E tests in the ClientApp. |
 | [Data Protection & Ticket Store](./dev/data-protection-and-ticket-store.md) | Cert-based DPAPI + blob-backed cookie ticket store configuration. |
+| [Auth Server User Migration Job](./dev/user-migration-job.md) | Standalone worker and Kubernetes job for safe auth-user migration, filtering, dedupe, and telemetry flushing. |
 | [Ring-Based Rollout](./dev/ring-based-rollout.md) ⇆ | How ring claims propagate through middleware and partition configuration/updates. Also see [business/ring-based-rollout](./business/ring-based-rollout.md). |
 | [Feature Flags](./dev/feature-flags.md) ⇆ | `Microsoft.FeatureManagement` wiring, `DisabledFeatureHandler`, `FeatureGate` attributes. Also see [business/feature-flags](./business/feature-flags.md). |
 | [Audit Logging](./dev/audit-logging.md) ⇆ | MediatR `AuditBehavior` + rolling append blob (tenant-admin) + client→sidecar→queue→table (audit-log). Also see [business/audit-logging](./business/audit-logging.md). |

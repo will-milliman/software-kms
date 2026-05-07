@@ -33,3 +33,5 @@ Authentication and configuration for Azure DevOps-hosted NuGet and npm package f
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9693 update monorepo to GU.15.0.103 — updated monorepo GridUtils package version to 15.0.103.
+- 2026-05-07: PR #9713 Remove XmlSerializers.dll references dropped in GridUtils 15.0.103 — removed obsolete `XmlSerializers.dll` references after the GridUtils 15.0.103 update.

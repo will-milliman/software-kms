@@ -10,6 +10,7 @@ User- and consumer-team-visible capabilities.
 | [Domain Onboarding](business/domain-onboarding.md) | Add a new public domain to the hub and get a managed cert from day one. |
 | [DCV Automation](business/dcv-automation.md) | Domain Control Validation closed end-to-end via DNS TXT — no humans pasting records. Cross-link: [dev DCV Watchdog Function](dev/dcv-watchdog-function.md). |
 | [Hub-Spoke Cert Distribution](business/hub-spoke-cert-distribution.md) | Certs issued in the hub KV land automatically in every registered spoke KV. Cross-link: [dev CertSync Functions](dev/cert-sync-functions.md). |
+| [Non-Managed Certificate Sync Targets](business/non-managed-cert-sync-targets.md) | CertSync can copy managed certs into extra target Key Vaults outside the standard spoke stack. |
 | [Global App Ingress (Azure Front Door)](business/global-app-ingress-frontdoor.md) | Shared Azure Front Door Premium edge in front of LTS apps. |
 | [Shared API Credentials (atmsec)](business/shared-api-credentials.md) | Central vault for DigiCert + DNS Made Easy API credentials. |
 | [Cert Lifecycle Observability](business/cert-lifecycle-observability.md) | Sentinel + Log Analytics + metric alerts on every KV and function. |

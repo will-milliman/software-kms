@@ -30,3 +30,4 @@ PowerShell-driven build pipeline under `user-docs/` that renders the UserGuide, 
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9662 New appendix Importing and Rebasing Changes — added a user-guide appendix covering import/rebase workflows and supporting screenshots.

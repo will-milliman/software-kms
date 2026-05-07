@@ -36,3 +36,7 @@ Customer-facing release notes surfaced inside Integrate (release notes view) and
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #9619 Manually create release notes section for 4.106 release — added the 4.106 release notes section.
+- 2026-05-07: PR #9681 v0.4 Release Notes — added SDK v0.4 release notes.
+- 2026-05-07: PR #9694 Update release notes for 2026.4.154 (202605.12) — updated release notes for build 2026.4.154.
+- 2026-05-07: PR #9715 chore: make release notes folder look like other doc folders — reorganized the release notes folder to match other documentation folders.

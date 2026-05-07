@@ -42,3 +42,4 @@ Auth-server services share a consistent **Data Protection** setup: the ASP.NET D
 
 - 2026-04-21: Seeded.
 - 2026-04-22: PR #376 AB#89807 Enhance persistent cookie creation with customizable expiration — `CreatePersistentCookie` now requires explicit expiration/current-time and enforces a 4096-byte cap; new `IssuerServiceOptions.RememberMeCookieExpiration` drives remember-me lifetime from config; added `HttpResponseExtensionsTests`.
+- 2026-05-07: PR #414 AB#91708 Enhance authentication flow with diagnostics, logging, and documentation — blob-backed `TicketStore` now logs store/retrieve/remove failures to make distributed session issues diagnosable.

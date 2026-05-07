@@ -13,6 +13,7 @@ A tab bar at the top of the content region where users open, switch between, pin
 - Clicking a SideNav item (or other trigger) calls `addResource(...)` and opens a new tab.
 - The newly added tab becomes active; clicking other tabs activates them. An active-tab `ResourceContext` is exposed via `useResource()` for the tab's content subtree.
 - Tabs can be pinned (persisted visually on the left) or closed.
+- Pinned tabs are ordered after non-dismissable anchor tabs in the same container, preserving fixed app tabs while still grouping user-pinned resources.
 - A `TabbedResourcesMenu` provides overflow access when tabs exceed visible width.
 - Resource visibility, active state, and container index are driven by the `TabItem` record managed by `createTabContext`.
 - The component uses a proper flex layout with a fixed viewport height so panel content scrolls independently of the tab bar.
@@ -40,3 +41,4 @@ A tab bar at the top of the content region where users open, switch between, pin
 
 - 2026-04-21: Seeded.
 - 2026-04-23: PR #167 Apply Milliman theme refinements and stabilize toolbox layout — `TabbedResources` reworked to flex layout with fixed viewport height for independent panel scrolling; `@integrate-core-ui/frame` bumped to 7.1.0.
+- 2026-05-07: PR #169 feat(tabbed-resources): pin tabs after non-dismissable anchors — pinning now uses a stable non-dismissable/pinned/rest partition scoped to the target container, with expanded menu and pinning-order tests.

@@ -49,4 +49,5 @@ Azure DevOps pipeline `pipelines/deploy.yml` triggered by the successful complet
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-07: PR #149 chore(AB#90469): Setting up for escrow on a weekly basis — added `pipelines/escrow.yaml` for weekly escrow packaging of Integrate Core UI Next.
 - 2026-04-23: PR #166 fix: publish idm-adapter via npm@1 task with feed auth — replaced the 3-step copy/auth/publish sequence with a single `npm@1` task scoped via `workingDir: packages/idm-adapter`, fixing feed auth resolution.
