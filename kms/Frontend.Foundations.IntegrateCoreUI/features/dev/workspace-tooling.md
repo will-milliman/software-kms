@@ -45,3 +45,4 @@ pnpm-workspace monorepo (`packageManager: "pnpm@9.7.1"`) with workspace globs fo
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #176 chore: add CODEOWNERS file — added repository-wide CODEOWNERS ownership for the frontend platform engineering team.

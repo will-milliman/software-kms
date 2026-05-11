@@ -43,3 +43,4 @@ AG Grid Enterprise wrapper themed for Milliman/Carbon, with built-in quick filte
 
 - 2026-04-21: Seeded.
 - 2026-05-07: PR #171 Migrate AG Grid from v32.3.9 to v35.2.1 — switched from modular AG Grid packages to v35 unified packages, added CellSelectionModule, split menu modules, type re-exports, and backward-compatible wrapper defaults.
+- 2026-05-11: PR #175 Update AG Grid Enterprise license key to v3 — updated the embedded AG Grid license to v3 credentials and bumped `@integrate-core-ui/grid` to 2.1.1.

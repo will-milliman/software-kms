@@ -103,9 +103,13 @@
 ## Build tooling & CI
 
 - **Azure DevOps Pipelines (`vsts/azure-pipelines.yml`, `.pipelines/**`, `monorepo/*/.pipelines/**`, `src/*/vsts/**`)** — dozens of per-service pipelines. Shared job templates at `.pipelines/templates/jobs/{dotnet-build,docker-build}.yml`. See `kms/rainier/features/dev/ci-pipelines.md`.
-- **GitHub Actions:** one workflow, `.github/workflows/sync-main-to-sdk.yml` — cron + manual sync of `main` into the latest `release/sdk/v*` branch.
+- **GitHub Actions:** `.github/workflows/sync-main-to-sdk.yml` syncs `main` into the latest `release/sdk/v*` branch; `.github/workflows/dependabot-auto-merge.yml` automates eligible Dependabot PR approval/auto-merge.
 - **Coverage:** `azurepipelines-coverage.yml` — 70% diff target.
 - **Cross-repo make:** `shared/make/*.mk` (Three Musketeers: make + docker compose + dotnet).
 - **E2E orchestration:** extensive Playwright stage catalog at `monorepo/desktop/ui/e2e/.pipelines/` (14 stages + app-installer steps).
 - **Doc builds:** `user-docs/.pipelines/docs-build.yml` invokes `user-docs/GeneratePdf.ps1` (wkhtmltopdf).
 - **Versioning:** `.pipelines/versioning/*.yaml` + PS helpers.
+
+## Change Log
+
+- 2026-05-11: PR #9763 feature: add dependabot PR auto complete action — added Dependabot auto-merge GitHub Actions automation to the build/tooling surface.

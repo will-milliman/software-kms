@@ -30,3 +30,4 @@
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #9762 AB#81600 Bump the nunit-non-major group with 2 updates — refreshed NUnit-related test dependencies and assertions in DesktopCore tests.

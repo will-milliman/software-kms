@@ -29,3 +29,8 @@ Repo-internal documentation trees: `docs/decisions/` (Architecture Decision Reco
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #9718 decision: session expiry UX mitigations — added an ADR for gateway-timeout/session-expiry UX mitigations.
+- 2026-05-11: PR #9723 doc: add mmd web deprecation rn — added documentation context for MMD web deprecation release-note messaging.
+- 2026-05-11: PR #9725 chore: configure dependabot for monorepo with major/minor split — reorganized Dependabot/developer-experience docs around monorepo update strategy.
+- 2026-05-11: PR #9727 fix: remove duplicate ecosystem-directory dependabot configurations — added how-to documentation for managing Dependabot tooling.
+- 2026-05-11: PR #9750 chore: add ab link and update pip dependabot grouping and schedule — updated Dependabot architecture docs for pip grouping and scheduling.

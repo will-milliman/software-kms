@@ -41,3 +41,4 @@ Every Key Vault, function, and ingress resource in the traffic-management founda
 - 2026-04-21: Seeded.
 - 2026-05-07: PR #56 chore(AB#91000): adding some proactive alerting — added proactive observability resources, alerts, and validation for ATMSEC, domain management, and cert-spoke stacks.
 - 2026-05-07: PR #67 doc(AB#91000): Adding overview doco for the SSL cert management solution stacks — added architecture, security, observability, and operational runbooks for certificate lifecycle management.
+- 2026-05-11: PR #68 feat(AB#91000): granting the grafana managed identity reader access in order to create visuals regarding secret age and certificate expiry — granted the Grafana managed identity reader access across ATMSEC, domain-management, and cert-spoke observability stacks.

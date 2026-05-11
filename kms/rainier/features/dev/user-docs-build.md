@@ -31,3 +31,4 @@ PowerShell-driven build pipeline under `user-docs/` that renders the UserGuide, 
 
 - 2026-04-21: Seeded.
 - 2026-05-07: PR #9662 New appendix Importing and Rebasing Changes — added a user-guide appendix covering import/rebase workflows and supporting screenshots.
+- 2026-05-11: PR #9716 docs: modernize the RN build tooling and introduce three musketeers — rebuilt Release Notes PDF generation around Makefile/Docker tooling, tests, and a PowerShell module.

@@ -33,3 +33,4 @@ The code behind the user-facing toggle system: `FeatureToggleConfig` (.NET) for 
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #9673 Update PE to generate model.cmd using dotnet — added a feature toggle for the .NET `model.cmd` generation path.

@@ -52,3 +52,5 @@ A self-hosted, hand-rolled OIDC / OAuth2 authorization server that mints access,
 - 2026-05-07: PR #437 AB#91963 Enhance session management with max age and renewal handling — silent renewal is denied with `login_required` when a session is too close to max age, and protocol errors map to 401 responses.
 - 2026-05-07: PR #438 AB#91971 Include max age limit in session authorization response — implicit authorization responses now include and propagate the OIDC `max_age` value.
 - 2026-05-07: PR #439 AB#91971 Fix MaxAge handling in authorization requests and responses — response building now uses request `MaxAge` when provided and otherwise falls back to the configured default.
+- 2026-05-11: PR #448 AB#91423 Allow anonymous access to health check endpoints — health-check endpoints now opt out of issuer authentication requirements.
+- 2026-05-11: PR #449 Bypass claims middleware for anonymous endpoints — anonymous endpoints bypass tenant/environment/ring claims middleware before authorization is evaluated.

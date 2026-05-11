@@ -40,3 +40,5 @@ Customer-facing release notes surfaced inside Integrate (release notes view) and
 - 2026-05-07: PR #9681 v0.4 Release Notes — added SDK v0.4 release notes.
 - 2026-05-07: PR #9694 Update release notes for 2026.4.154 (202605.12) — updated release notes for build 2026.4.154.
 - 2026-05-07: PR #9715 chore: make release notes folder look like other doc folders — reorganized the release notes folder to match other documentation folders.
+- 2026-05-11: PR #9716 docs: modernize the RN build tooling and introduce three musketeers — migrated release-note source/build structure while preserving customer-facing PDF output.
+- 2026-05-11: PR #9723 doc: add mmd web deprecation rn — added release-note content announcing MMD web deprecation.

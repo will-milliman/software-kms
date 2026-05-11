@@ -40,3 +40,6 @@ Every .NET service emits **OpenTelemetry** traces, metrics, and logs, wired up c
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #447 AB#91423 Add Kubernetes health checks and refactor health check infrastructure — added blob-container startup/readiness checks and exposed `/health/startup` and `/health/ready` probes across AuthServer services.
+- 2026-05-11: PR #448 AB#91423 Allow anonymous access to health check endpoints — marked health probes anonymous so Kubernetes can call them without auth-server claims processing.
+- 2026-05-11: PR #449 Bypass claims middleware for anonymous endpoints — moved anonymous-endpoint detection to claims middleware registration so health probes skip the whole claims pipeline.

@@ -29,3 +29,7 @@
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #9725 chore: configure dependabot for monorepo with major/minor split — updated workspace folders/settings alongside Dependabot monorepo setup.
+- 2026-05-11: PR #9727 fix: remove duplicate ecosystem-directory dependabot configurations — refined workspace YAML handling for Dependabot config work.
+- 2026-05-11: PR #9750 chore: add ab link and update pip dependabot grouping and schedule — updated workspace schema handling for Dependabot YAML files.
+- 2026-05-11: PR #9763 feature: add dependabot PR auto complete action — added GitHub workflow YAML schema coverage for the new Dependabot automation workflow.

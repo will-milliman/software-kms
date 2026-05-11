@@ -31,3 +31,4 @@ An AI-assisted workflow that drafts customer-facing release notes from merged PR
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #9716 docs: modernize the RN build tooling and introduce three musketeers — release-note automation now uses the updated Docker/Make/PowerShell build flow and pipeline wiring.

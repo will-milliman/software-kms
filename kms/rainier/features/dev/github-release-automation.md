@@ -31,3 +31,5 @@ Containerized tools and GitHub workflows that automate tagging builds, creating 
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-11: PR #9716 docs: modernize the RN build tooling and introduce three musketeers — release-note PR automation scripts and pipeline templates were adjusted for the new docs build flow.
+- 2026-05-11: PR #9763 feature: add dependabot PR auto complete action — added a GitHub Actions workflow that can approve and enable auto-merge for eligible Dependabot PRs.
