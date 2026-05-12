@@ -33,3 +33,4 @@
 - 2026-05-11: PR #9727 fix: remove duplicate ecosystem-directory dependabot configurations — refined workspace YAML handling for Dependabot config work.
 - 2026-05-11: PR #9750 chore: add ab link and update pip dependabot grouping and schedule — updated workspace schema handling for Dependabot YAML files.
 - 2026-05-11: PR #9763 feature: add dependabot PR auto complete action — added GitHub workflow YAML schema coverage for the new Dependabot automation workflow.
+- 2026-05-12: PR #9765 fix: ab link adding workflow does not run on PR edit — added the GitHub Actions VS Code extension recommendation alongside Azure Pipelines tooling.

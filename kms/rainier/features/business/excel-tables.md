@@ -38,3 +38,4 @@ Round-trip MG-ALFA table files (`.Atb2`) to and from Excel workbooks via OpenXML
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-12: PR #9682 Fix cleaner incorrectly removing Excel table file changes from change reports — Excel table file content-only changes now remain visible in change reports instead of being cleaned away as empty ATB2 diffs.

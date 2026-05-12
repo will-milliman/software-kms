@@ -34,3 +34,5 @@ Repo-internal documentation trees: `docs/decisions/` (Architecture Decision Reco
 - 2026-05-11: PR #9725 chore: configure dependabot for monorepo with major/minor split — reorganized Dependabot/developer-experience docs around monorepo update strategy.
 - 2026-05-11: PR #9727 fix: remove duplicate ecosystem-directory dependabot configurations — added how-to documentation for managing Dependabot tooling.
 - 2026-05-11: PR #9750 chore: add ab link and update pip dependabot grouping and schedule — updated Dependabot architecture docs for pip grouping and scheduling.
+- 2026-05-12: PR #9765 fix: ab link adding workflow does not run on PR edit — corrected Dependabot ignore syntax and changed AB-link insertion so the work item stays at the top of edited PR bodies.
+- 2026-05-12: PR #9767 fix: try greater than or equal instead of inclusive range — converted Dependabot version caps to `>=` constraints for AutoMapper, MediatR, and FluentAssertions.

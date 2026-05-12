@@ -2,7 +2,7 @@
 
 ## Component overview (prose)
 
-The repo is organized as **four independent Terraform stacks** (`atmsec`, `domain-management`, `ssl-cert-spoke`, `global-app-ingress`) plus **two shared modules** (`shared/modules/KeyVault`, `shared/modules/flex-function-app`). Each stack is deployable on its own and has its own Azure DevOps pipelines.
+The repo is organized as independently deployable Terraform stacks (`atmsec`, `domain-management`, `ssl-cert-spoke`, `global-app-ingress`, and `observability`) plus shared modules (`shared/modules/KeyVault`, `shared/modules/flex-function-app`, and networking spike modules). Each stack is deployable on its own and has its own Azure DevOps pipelines.
 
 The central design is a **hub-and-spoke certificate distribution topology**:
 
@@ -10,6 +10,7 @@ The central design is a **hub-and-spoke certificate distribution topology**:
 - **`domain-management` (the hub)** is the brain. It provisions the **hub Key Vault** (`sslcerthub-<env>`), registers DigiCert as an issuer, declares each domain as an Azure Key Vault `certificate` with auto-renewal, and owns the **DCV Watchdog** Azure Function that closes the DCV loop by writing TXT records into DNS Made Easy. When a cert is issued or is nearing expiry, the hub KV emits events to a shared **Event Grid System Topic** (`hub-kv-cert-events-<env>`).
 - **`ssl-cert-spoke` (the spokes)** are lightweight stacks. Each spoke provisions its own Key Vault, a storage account with a `cert-sync-events` queue (+ DLQ), and two functions: `CertSyncFunction` (queue-triggered per event) and `FullSyncFunction` (timer-triggered safety net). The spoke **subscribes to the hub Event Grid topic** — hub cert events land in the spoke's queue and trigger a copy of the cert from hub KV to spoke KV.
 - **`global-app-ingress` (GAI)** stands up Azure Front Door Premium as the shared edge in front of LTS apps. Minimal stack today (marked "Incubating, TODO add IaC build badge").
+- **`observability`** provisions the Key Vault watcher function and Application Insights used to emit certificate-expiry and secret-age telemetry for dashboards across hub, spoke, and ATMSEC vaults.
 
 ### High-level mermaid
 
@@ -52,8 +53,17 @@ flowchart TB
     AFD[Azure Front Door Premium]
   end
 
+  subgraph obs["observability"]
+    KVWATCH[KeyVault Watcher Function<br/>timer hourly]
+    APPINS[(Application Insights)]
+    KVWATCH --> APPINS
+  end
+
   APP[LTS application workloads] -->|uses cert| SPKV
   USERS((End users)) --> AFD --> APP
+  KVWATCH -. reads metadata .-> ATMKV
+  KVWATCH -. reads metadata .-> HUBKV
+  KVWATCH -. reads metadata .-> SPKV
 ```
 
 ## Stacks (entry points)
@@ -127,6 +137,17 @@ flowchart TB
 - **Make prefix:** `gai__`.
 - **Pipeline:** `.pipelines/infra-deploy.yaml`.
 
+### `observability/` — Key Vault lifecycle telemetry
+
+- **Status:** Incubating (added 2026-05-12).
+- **Root modules:** `observability/deploy/*.tf`.
+- **What it creates:** a Flex Consumption Python function app (`kvwatcher-<env>`) plus Application Insights for Key Vault lifecycle telemetry.
+- **Function:** `observability/functions/keyvault-watcher/src/KeyVaultWatcherFunction/`.
+- **Configuration:** `observability/configuration/dev.json` supplies watched vault names and certificate/secret observation flags.
+- **Pipelines:** `observability/.pipelines/infra-cd.yaml`, `observability/.pipelines/function-cd.yaml`.
+- **Make prefixes:** `observability__infra__*`, `observability__app__*`.
+- See feature: [Key Vault Watcher Function](features/dev/key-vault-watcher-function.md).
+
 ### `spike-networking/` — Hub-and-spoke VNet topology spike
 
 - **Status:** Spike (incubating, added 2026-04-23).
@@ -186,6 +207,7 @@ Each stack reads a `configuration/<env>.json`:
 - `domain-management/configuration/{dev,prod}.json`
 - `ssl-cert-spoke/configuration/{apidev,dev,gitopsdev,gitopsprod}.json`
 - `global-app-ingress/configuration/dev.json`
+- `observability/configuration/dev.json`
 
 The root `Makefile` loads the matching JSON (by `ENV=` var) and feeds it into `terraform` via `-var-file`.
 
@@ -209,6 +231,7 @@ The root `Makefile` loads the matching JSON (by `ENV=` var) and feeds it into `t
 - **Secrets rotation out-of-band** — `atmsec` secrets are `ignore_changes = [value]`; rotation happens via the portal or a rotation runbook.
 - **Mandatory tagging** — every resource bears the eight platform tags from per-stack `tags.tf`; tags are asserted by Conftest.
 - **Diagnostic logs** to Sentinel + Log Analytics on all Key Vaults.
+- **Key Vault watcher telemetry** to Application Insights for certificate expiry and secret age without reading secret values.
 - **Network:** KVs deny public by default (allow AzureServices); function apps IP-restricted to AzureCloud service tag.
 
 ## Non-obvious constraints

@@ -29,6 +29,7 @@ Build, CI, tooling, internal developer experience.
 | [Shared KeyVault Module](dev/shared-keyvault-module.md) | RBAC-authorized KV with Sentinel + LA diagnostics. |
 | [Shared Flex Function-App Module](dev/shared-flex-function-module.md) | Flex Consumption (`FC1`) function app with blob-deploy + metric alerts. |
 | [DCV Watchdog Function](dev/dcv-watchdog-function.md) | Python timer function driving the DCV state machine. Cross-link: [business DCV Automation](business/dcv-automation.md). |
+| [Key Vault Watcher Function](dev/key-vault-watcher-function.md) | Python timer function that emits certificate expiry and secret-age telemetry for configured Key Vaults. Cross-link: [business Cert Lifecycle Observability](business/cert-lifecycle-observability.md). |
 | [CertSync Functions](dev/cert-sync-functions.md) | Queue-trigger + timer Python functions that sync hub certs to spokes. Cross-link: [business Hub-Spoke Cert Distribution](business/hub-spoke-cert-distribution.md). |
 | [DCV State Machine](dev/dcv-state-machine.md) | `DomainState` × `DomainAction` dispatch table + action handlers. |
 | [DigiCert v2 API Client](dev/digicert-v2-client.md) | Python client for DigiCert CertCentral v2. |

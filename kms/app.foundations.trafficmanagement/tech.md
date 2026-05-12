@@ -5,7 +5,7 @@
 | Language | Where | Notes |
 |---|---|---|
 | **HCL / Terraform** | `atmsec/deploy/**`, `domain-management/deploy/**`, `ssl-cert-spoke/deploy/**`, `global-app-ingress/deploy/**`, `shared/modules/**` | Primary IaC language. Four independent stacks + two shared modules. |
-| **Python 3.12** | `domain-management/functions/dcv-watchdog/src/**`, `ssl-cert-spoke/functions/cert-sync/src/**` | Azure Functions runtime. Timer + Queue triggers. |
+| **Python 3.12** | `domain-management/functions/dcv-watchdog/src/**`, `ssl-cert-spoke/functions/cert-sync/src/**`, `observability/functions/keyvault-watcher/src/**` | Azure Functions runtime. Timer + Queue triggers. |
 | **Makefile** | root `Makefile`, per-stack `make.mk`, `shared/terraform.mk`, `cicd-shared/make/help.mk` | Three Musketeers orchestration. |
 | **Shell** | `auth.sh`, `logout.sh` | Azure CLI login helpers. |
 | **PowerShell** | `.pipelines/**` step scripts | Pipeline glue. |
@@ -41,6 +41,7 @@
   - **DcvWatchdogFunction** (`domain-management/functions/dcv-watchdog/`) — Timer trigger `0 0 * * *` (daily). Drives domain DCV state machine.
   - **CertSyncFunction** (`ssl-cert-spoke/functions/cert-sync/src/CertSyncFunction/`) — Queue trigger on `cert-sync-events`. Syncs single cert from hub → spoke.
   - **FullSyncFunction** (`ssl-cert-spoke/functions/cert-sync/src/FullSyncFunction/`) — Timer trigger `%FULL_SYNC_SCHEDULE%`. Catches up missed events.
+  - **KeyVaultWatcherFunction** (`observability/functions/keyvault-watcher/src/KeyVaultWatcherFunction/`) — Timer trigger `0 0 * * *` (hourly). Emits certificate expiry and secret-age telemetry for configured vaults.
 - **Shared function libs:**
   - `dcv-watchdog/src/DcvWatchdogFunction/clients/` — `DigiCertClientV2` (v2 REST, `X-DC-DEVKEY` auth), `DNSMadeEasyClient` (HMAC-SHA1 auth), `KeyVaultClient` (DefaultAzureCredential).
   - `cert-sync/src/shared/` — `config.py`, `keyvault_client.py`, `sync_logic.py`.
@@ -74,6 +75,7 @@
 - Per-stack pipelines under `<stack>/.pipelines/`:
   - `infra-cd.yaml` (or `infra-deploy.yaml` in `global-app-ingress`) — terraform plan/apply.
   - `function-cd.yaml` — Python tests, package, deploy zip to blob, trigger function restart.
+  - `observability/.pipelines/function-cd.yaml` — builds, tests, packages, and publishes the Key Vault watcher function package.
 - **Shared pipeline templates:** `shared/.pipelines/templates/{validate,package,deploy,destroy}-iac-template.yaml`.
 - **Auth:** Azure DevOps **OIDC** federated identity (`ARM_USE_OIDC=true`). No stored client secrets.
 - **Submodule:** `cicd-shared` → `https://github.com/milliman-lts/cicd-shared.git` (provides `make/help.mk` for self-documenting make help).

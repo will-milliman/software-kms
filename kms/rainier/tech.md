@@ -63,6 +63,7 @@
 ## Projection Execution
 
 - **.NET 8** console host `Milliman.LTS.MgAlfa.ProjectionExecution.ConsoleHost.exe` at `monorepo/projection-execution/src/MgAlfa.ProjectionExecution/MgAlfa.ProjectionExecution.ConsoleHost/`.
+- **ProjectionExecution package publishing retired:** PR #9783 marked the ProjectionExecution, Contracts, and ConsoleHost projects non-packable and removed their `dotnet pack`/`dotnet push` pipeline steps; local consumers reference the ConsoleHost project output directly.
 - **Native calc engine (AHost)** orchestrated via `MgAlfa.Runs.Execution/` and `grid-utils-integration/*.targets` which wire the external GridUtils library (`AhostSolver.exe`, `CellCycle.Merge.exe`, `NestedProjection.JobManager.exe`).
 - **Intex** integration in `MgAlfa.Intex/`.
 - **Cross-process IPC:** `Milliman.LTS.Communication.Core/` (named pipes / messaging).
@@ -113,3 +114,5 @@
 ## Change Log
 
 - 2026-05-11: PR #9763 feature: add dependabot PR auto complete action — added Dependabot auto-merge GitHub Actions automation to the build/tooling surface.
+- 2026-05-12: PR #9767 fix: try greater than or equal instead of inclusive range — Dependabot ignore ranges now use supported `>=` constraints for capped commercialized libraries.
+- 2026-05-12: PR #9783 Retire NuGet packages for ProjectionExecution, Contracts, and Console — ProjectionExecution no longer emits internal NuGet packages; the build keeps only the regression-tool artifact.

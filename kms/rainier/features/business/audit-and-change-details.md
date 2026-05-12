@@ -34,3 +34,4 @@ Surface per-project change history, audit-oriented reports, and detailed per-cha
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-12: PR #9682 Fix cleaner incorrectly removing Excel table file changes from change reports — change reports now preserve Excel pfile rows when upstream marks file-content changes and no ATB2 module endpoints exist to inspect.

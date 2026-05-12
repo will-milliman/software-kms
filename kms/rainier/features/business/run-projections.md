@@ -58,3 +58,4 @@ Start, monitor, cancel, and retrieve results of MG-ALFA projection jobs. Support
 - 2026-05-07: PR #9638 Trim fixed lives adjustment to provide only 10 non-zero leading digits — projection fixed-lives adjustment output is trimmed to stable significant digits.
 - 2026-05-07: PR #9659 Fix stale results folder by passing updated preferences in onFolderChanged — changed results-folder preferences now flow through to job configuration.
 - 2026-05-11: PR #9673 Update PE to generate model.cmd using dotnet — projection execution can now generate `model.cmd` through a .NET path, with a feature toggle and RunManager proxy support.
+- 2026-05-12: PR #9783 Retire NuGet packages for ProjectionExecution, Contracts, and Console — RunManager shims now reference the ConsoleHost project directly and ProjectionExecution package publishing was removed.

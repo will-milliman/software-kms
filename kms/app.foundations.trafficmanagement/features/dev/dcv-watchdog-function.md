@@ -19,6 +19,8 @@ A Python 3.12 Azure Function, timer-triggered daily, that drives every managed d
   3. Looks up `DomainAction` in the state-machine matrix (`domain_state.py`).
   4. Dispatches to one of `actions/{add_domain,activate_domain,submit_validation,cleanup_dcv_records}.py` (function-factory pattern).
   5. Emits OTEL spans via the `@traced` decorator.
+- Emits structured `dcv_domain_status` log records for dashboards and force-flushes OTEL exporters before the timer function exits.
+- Cleanup marks Terraform-managed DCV token/timestamp secrets as `DONE` instead of deleting or blanking them, avoiding Terraform drift while suppressing repeat cleanup.
 - Configurable knobs (env vars):
   - `DCV_EXPIRY_THRESHOLD_DAYS` (default 30)
   - `PENDING_VALIDATION_TIMEOUT_HOURS` (default 24)
@@ -54,3 +56,4 @@ A Python 3.12 Azure Function, timer-triggered daily, that drives every managed d
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-12: PR #72 chore(AB#91000): force flush the trace buffer — DCV cleanup now writes `DONE` sentinels, emits domain status telemetry, and force-flushes OTEL providers before exit.
