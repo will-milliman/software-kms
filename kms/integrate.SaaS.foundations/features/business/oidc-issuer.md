@@ -15,6 +15,7 @@ A self-hosted, hand-rolled OIDC / OAuth2 authorization server that mints access,
 - Persists authorization codes in `auth-codes` blob and refresh tokens in `auth-refresh` blob; storage-account lifecycle policy owns expiry cleanup rather than issuer background workers.
 - Federates upstream to Auth0 / Entra ID (prod) or Keycloak (dev) via `OpenIdConnect`.
 - Issues Milliman custom claims under `http://schemas.milliman.com/identity/claims/*` (see `domain.md`).
+- Authorization responses expose both access-token expiry (`expires_in`) and remaining issuer session lifetime (`session_expires_in`) so clients can distinguish API token lifetime from interactive session lifetime.
 - Applies OWASP security headers and cert-based data protection to session state.
 
 ## Entry Points
@@ -54,3 +55,5 @@ A self-hosted, hand-rolled OIDC / OAuth2 authorization server that mints access,
 - 2026-05-07: PR #439 AB#91971 Fix MaxAge handling in authorization requests and responses — response building now uses request `MaxAge` when provided and otherwise falls back to the configured default.
 - 2026-05-11: PR #448 AB#91423 Allow anonymous access to health check endpoints — health-check endpoints now opt out of issuer authentication requirements.
 - 2026-05-11: PR #449 Bypass claims middleware for anonymous endpoints — anonymous endpoints bypass tenant/environment/ring claims middleware before authorization is evaluated.
+- 2026-05-12: PR #458 AB#92136: Fix IdToken expiration handling and update authorization response — ID token expiry is calculated from authentication time, access token expiry from issue time, and implicit redirects include `session_expires_in`.
+- 2026-05-13: PR #469 AB#92136: Refactor session renewal logic to enforce max age limit — silent renewal now denies only sessions that meet or exceed `MaxAge`, removing the separate minimum-remaining-session-time option.

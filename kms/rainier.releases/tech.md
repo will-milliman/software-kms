@@ -37,7 +37,9 @@ No compiled code, tests, or package manifests are present. The repo is pure IaC 
 ## Build tooling / CI
 
 - **No CI workflows under `.github/workflows/`.** There is no `.github` directory at the repo root. The repo is consumed by Azure DevOps pipelines, not GitHub Actions.
-- **`.pipelines/integrate-release-approvals.yaml`** — the only pipeline definition. Registered in ADO as pipeline **799** ("Integrate App Approvals").
+- **`.pipelines/integrate-release-approvals.yaml`** — production pipeline definition. Registered in ADO as pipeline **799** ("Integrate App Approvals").
+- **`.pipelines/integrate-release-approvals-sandbox.yaml`** — sandbox pipeline entry point for dry-running the approval workflow.
+- **`.pipelines/templates/stages/integrate-release-approvals-stages.yaml`** — shared production/sandbox stage implementation.
 - **`.pipelines/scripts/Assert-ResourceBranchesAreMain.ps1`** and **`Assert-QualysScanPassed.ps1`** — release policy enforcement helpers used by the approval pipeline.
 - **Pipeline variables required in ADO UI:**
   - `send_grid_api_key` — secret, used by the notification email step.
@@ -47,3 +49,7 @@ No compiled code, tests, or package manifests are present. The repo is pure IaC 
 ## Governance
 
 - `CODEOWNERS` requires review from **`@milliman-lts/authoring-and-governance`** and **`@milliman-lts/ops-approvers`** for all paths, with an explicit rule for `/.pipelines/`.
+
+## Change Log
+
+- 2026-05-12: PR #23 Add sandbox pipeline for release approvals workflow — introduced the shared approval stages template and sandbox pipeline with dry-run notification/release-note behavior.

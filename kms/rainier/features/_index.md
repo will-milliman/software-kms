@@ -37,6 +37,7 @@ User- and customer-visible capabilities.
 | [Release Notes](business/release-notes.md) | Customer-facing release notes surfaced in-app. Cross-link: [Release Note Generation (dev)](dev/release-note-generation.md). |
 | [Swagger API Explorer](business/swagger-api-explorer.md) | Live API docs for Project Manager (also used by devs — see [dev](dev/swagger-api-explorer.md)). |
 | [Segments Grids](business/segments-grids.md) | Asset, liability, and reinvestment segment grids in Project Manager authoring. |
+| [Localized UI Text](business/localized-ui-text.md) ⇆ | User-facing Integrate UI copy is routed through shared translation catalogs. Also see [dev/localized-ui-text](dev/localized-ui-text.md). |
 
 ## Dev features
 
@@ -86,3 +87,4 @@ Build, CI, tooling, internal developer experience.
 | [Dev CLI Tools](dev/dev-cli-tools.md) | AppInsightsClient, DevOpsClient, IconMaker, ScreenRecorder, support apps. |
 | [VS Code Workspace](dev/vscode-workspace.md) | `rainier.code-workspace` multi-root definition. |
 | [Code Coverage Threshold](dev/code-coverage-threshold.md) | `azurepipelines-coverage.yml` 70% diff target. |
+| [Localized UI Text](dev/localized-ui-text.md) ⇆ | Translation JSON catalogs and lint enforcement for UI copy. Also see [business/localized-ui-text](business/localized-ui-text.md). |

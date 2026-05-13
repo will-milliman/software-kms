@@ -36,7 +36,7 @@
 - `ClientApplication`, `ClientCredentials`, `ClientAuthorizeRequest` — OIDC clients.
 - `User`, `UserInfo`, `GroupModel` — user/group records.
 - Protocol types:
-  - `AuthorizeRequest` / `AuthorizeResponse`, `AuthorizationData`
+  - `AuthorizeRequest` / `AuthorizeResponse`, `AuthorizationData` (includes `MaxAge` and `SessionExpiresIn` for client-visible session lifetime)
   - `TokenIssueRequest` / `TokenIssueResponse`, `RefreshedTokenResponse`, `RefreshTokenData`
   - `LogoutData`, `OpenIdDiscoveryDocument`, `Prompt`, `TokenTime`, `ValidationResponse`.
 - Cleanup: `AuthorizationCodeCleanupService`, `RefreshTokenCleanupService` background workers.
@@ -141,6 +141,7 @@ Registered in `tenant-admin/src/Integrate.Gateway.TenantManager.Api/Extensions/S
 ### OIDC token lifetimes
 
 - `auth-server/docs/timeouts.md` describes the four-layer session model (Entra ID → Auth0 → Issuer → Client cookies). The AppHost currently ships in "SCENARIO 3: TIMEOUT TESTING" with aggressive lifetimes (`auth-server/src/Integrate.SaaS.AuthServer.AppHost/AppHost.cs:55-64`).
+- Silent renewal is denied once issuer session age reaches `IssuerServiceOptions.MaxAge`; the removed `MinimumRemainingSessionTime` option no longer forces early re-authentication.
 
 ### Customer-scoped reports (reports + tenant-admin)
 

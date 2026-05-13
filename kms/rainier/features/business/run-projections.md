@@ -14,6 +14,7 @@ Start, monitor, cancel, and retrieve results of MG-ALFA projection jobs. Support
 - RunManager schedules the job, launches Projection Execution with a `ProjectionExecutionConfiguration` (calc engine directory, model path, projections list).
 - Status streams back over SignalR; job history records every run.
 - Results can be downloaded per-run, batched, or per-projection.
+- APL run-preparation warnings preserve their warning semantics across transport instead of being transformed into errors.
 - User can cancel a running job; list compatible calc engines.
 - GridUtils logging preferences and run folder changes propagate into compute job execution so overridden settings are honored.
 
@@ -59,3 +60,4 @@ Start, monitor, cancel, and retrieve results of MG-ALFA projection jobs. Support
 - 2026-05-07: PR #9659 Fix stale results folder by passing updated preferences in onFolderChanged — changed results-folder preferences now flow through to job configuration.
 - 2026-05-11: PR #9673 Update PE to generate model.cmd using dotnet — projection execution can now generate `model.cmd` through a .NET path, with a feature toggle and RunManager proxy support.
 - 2026-05-12: PR #9783 Retire NuGet packages for ProjectionExecution, Contracts, and Console — RunManager shims now reference the ConsoleHost project directly and ProjectionExecution package publishing was removed.
+- 2026-05-12: PR #9781 Preserve Warning message type across APL transport during Run Prep — run-preparation warnings are preserved in callback/progress messages instead of becoming errors.

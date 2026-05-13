@@ -36,3 +36,4 @@ Repo-internal documentation trees: `docs/decisions/` (Architecture Decision Reco
 - 2026-05-11: PR #9750 chore: add ab link and update pip dependabot grouping and schedule — updated Dependabot architecture docs for pip grouping and scheduling.
 - 2026-05-12: PR #9765 fix: ab link adding workflow does not run on PR edit — corrected Dependabot ignore syntax and changed AB-link insertion so the work item stays at the top of edited PR bodies.
 - 2026-05-12: PR #9767 fix: try greater than or equal instead of inclusive range — converted Dependabot version caps to `>=` constraints for AutoMapper, MediatR, and FluentAssertions.
+- 2026-05-13: PR #9796 feature(dev): allow greater than one directory in dependabot update buckets — updated generated Dependabot config/docs for multi-directory NuGet update buckets and org-level registry configuration.

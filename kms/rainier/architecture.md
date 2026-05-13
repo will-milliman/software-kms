@@ -137,10 +137,7 @@ rainier/
 ├── .vscode/ .vsts/                  # Editor + legacy VSTS config
 ├── docs/                            # ADRs, how-to, templates, devex
 ├── monorepo/                        # Multi-product monorepo (pnpm + .NET)
-│   ├── cloud/                       # (placeholder)
 │   ├── desktop/                     # Integrate desktop
-│   │   ├── embedded/                # (placeholder)
-│   │   ├── server/                  # (placeholder)
 │   │   └── ui/                      # pnpm workspace: apps/{electron,web,skeleton}, packages/{*}, e2e/, tools/storybook/
 │   ├── desktop-core/                # GDF file formats + core model library (the foundation)
 │   ├── grid-utils-integration/      # MSBuild .targets wiring GridUtils HPC executables

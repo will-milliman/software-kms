@@ -21,7 +21,7 @@
 - **Framework:** React 19, Vite 6, Electron 34, Redux Toolkit 2.5, RTK Query.
 - **Design system:** Carbon Design System wrapped by `@repo/components`.
 - **Testing:** Playwright (E2E at `monorepo/desktop/ui/e2e/electron/`), Jest.
-- **Storybook:** at `monorepo/desktop/ui/tools/storybook/`; published to `https://ltssharedassets.z13.web.core.windows.net/`.
+- **Storybook:** at `monorepo/desktop/ui/tools/storybook/`; published to `https://sturdy-spoon-2qrpy7z.pages.github.io/` via GitHub Pages rather than the retired Azure Blob publish pipeline.
 - **Feature toggles:** `apps/electron/src/options/feature-toggles/app-toggles.ts:26` (~40 `ToggleItem`s), exposed to renderer via `@repo/feature-toggles`.
 
 ## Backend (.NET)
@@ -104,7 +104,7 @@
 ## Build tooling & CI
 
 - **Azure DevOps Pipelines (`vsts/azure-pipelines.yml`, `.pipelines/**`, `monorepo/*/.pipelines/**`, `src/*/vsts/**`)** — dozens of per-service pipelines. Shared job templates at `.pipelines/templates/jobs/{dotnet-build,docker-build}.yml`. See `kms/rainier/features/dev/ci-pipelines.md`.
-- **GitHub Actions:** `.github/workflows/sync-main-to-sdk.yml` syncs `main` into the latest `release/sdk/v*` branch; `.github/workflows/dependabot-auto-merge.yml` automates eligible Dependabot PR approval/auto-merge.
+- **GitHub Actions:** `.github/workflows/sync-main-to-sdk.yml` syncs `main` into the latest `release/sdk/v*` branch; `.github/workflows/dependabot-auto-merge.yml` automates eligible Dependabot PR approval/auto-merge; Storybook deploys to GitHub Pages.
 - **Coverage:** `azurepipelines-coverage.yml` — 70% diff target.
 - **Cross-repo make:** `shared/make/*.mk` (Three Musketeers: make + docker compose + dotnet).
 - **E2E orchestration:** extensive Playwright stage catalog at `monorepo/desktop/ui/e2e/.pipelines/` (14 stages + app-installer steps).
@@ -116,3 +116,8 @@
 - 2026-05-11: PR #9763 feature: add dependabot PR auto complete action — added Dependabot auto-merge GitHub Actions automation to the build/tooling surface.
 - 2026-05-12: PR #9767 fix: try greater than or equal instead of inclusive range — Dependabot ignore ranges now use supported `>=` constraints for capped commercialized libraries.
 - 2026-05-12: PR #9783 Retire NuGet packages for ProjectionExecution, Contracts, and Console — ProjectionExecution no longer emits internal NuGet packages; the build keeps only the regression-tool artifact.
+- 2026-05-12: PR #9792 chore: remove nuget feed config, provided by org level config — Dependabot NuGet registry configuration is supplied at org level.
+- 2026-05-12: PR #9782 Remove strictPropertyInitialization and suppressImplicitAnyIndexErrors from @repo/store — `@repo/store` TypeScript builds now run without those compiler-option overrides.
+- 2026-05-12: PR #9793 Disable Azure Pipeline storybook deployment and update docs — Storybook publishing moved fully off the Azure Blob pipeline to the GitHub Pages URL.
+- 2026-05-13: PR #9685 feat: migrate all JSX unlocalized strings to `@repo/translations` and promote lint rule to error — UI localization enforcement is now part of the frontend lint baseline.
+- 2026-05-13: PR #9796 feature(dev): allow greater than one directory in dependabot update buckets — Dependabot NuGet update buckets can cover multiple directories.

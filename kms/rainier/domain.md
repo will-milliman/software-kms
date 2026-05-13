@@ -48,7 +48,7 @@
 | **Edit Session** | Server-side tracked editing session on project changes. `Rainier.Server.Core/Domain/ProjectChanges/EditSession.cs`. |
 | **Governed Edit** | A model edit that must go through `Rainier.Governance` (not direct file writes) — e.g., metadata, calc-engine-version upgrade, bulk projection setting edits. Gated by `Permissions.Authoring.Edit`. |
 | **LAPA / Copilot Chat** | AI chatbot inside Integrate. Gated by `EnableLapaChatbot` toggle. Component: `apps/web/src/components/copilot-chat/`. |
-| **Storybook** | Component visual catalog (`monorepo/desktop/ui/tools/storybook/`), published to `https://ltssharedassets.z13.web.core.windows.net/`. |
+| **Storybook** | Component visual catalog (`monorepo/desktop/ui/tools/storybook/`), published to `https://sturdy-spoon-2qrpy7z.pages.github.io/`. |
 | **ESG** | Economic Scenario Generator. Risk-neutral scenarios delivered as `.bin` files in `monorepo/risk-neutral-esg/`, quarterly. |
 | **SDK (Calc Engine SDK)** | A related product line branched off `release/sdk/v*`. `.github/workflows/sync-main-to-sdk.yml` keeps it in sync. Has a dedicated AI agent (`.github/agents/sdk-agent/`). |
 

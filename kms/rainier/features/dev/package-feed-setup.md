@@ -14,6 +14,7 @@ Authentication and configuration for Azure DevOps-hosted NuGet and npm package f
 - Developers run `vsts-npm-auth` (Windows) to refresh npm credentials stored in `~/.npmrc`.
 - NuGet auth uses a PAT via `NuGetCredentialProvider` or env vars in CI; Azure DevOps service connections in pipelines.
 - See repo `README.md` setup section for step-by-step.
+- Dependabot NuGet jobs rely on org-level registry configuration and can group multiple directories into a single update bucket.
 
 ## Entry Points
 
@@ -35,3 +36,5 @@ Authentication and configuration for Azure DevOps-hosted NuGet and npm package f
 - 2026-04-21: Seeded.
 - 2026-05-07: PR #9693 update monorepo to GU.15.0.103 — updated monorepo GridUtils package version to 15.0.103.
 - 2026-05-07: PR #9713 Remove XmlSerializers.dll references dropped in GridUtils 15.0.103 — removed obsolete `XmlSerializers.dll` references after the GridUtils 15.0.103 update.
+- 2026-05-12: PR #9792 chore: remove nuget feed config, provided by org level config — removed explicit NuGet registry configuration from Dependabot config.
+- 2026-05-13: PR #9796 feature(dev): allow greater than one directory in dependabot update buckets — grouped related NuGet directories into shared Dependabot update buckets.

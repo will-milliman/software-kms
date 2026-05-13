@@ -13,6 +13,8 @@ Authoring UI and Project Manager APIs for segment data grids, including liabilit
 - Segment tabs are feature-flagged and exposed from the Project Manager authoring experience.
 - Server command handlers provide grid row data, column definitions, and save commands.
 - UI endpoints use AG Grid query APIs for the segment-specific tables.
+- Liability segments expose a `New business source` dropdown (`AIL` or `NB Model`) and persist the selected source back into the Ain2 liability new-business definition.
+- Server-validation warnings can be displayed in the AG Grid query UI without blocking save; errors still block save.
 - System tests cover each segment endpoint and startup path.
 
 ## Entry Points
@@ -38,3 +40,4 @@ Authoring UI and Project Manager APIs for segment data grids, including liabilit
 - 2026-05-07: PR #9666 Add Liability Segments Query Grid (server + UI + feature flag) — introduced liability segment server endpoints, UI tab, store query API, and system tests.
 - 2026-05-07: PR #9680 Add Asset Segments tab to Segments page — added asset segment grid UI/API wiring and tests.
 - 2026-05-07: PR #9712 Add reinvestments tab to the segments grid — added reinvestment inputs grid alongside asset and liability segments.
+- 2026-05-12: PR #9707 Add selectable New Business Source column to Liability Segments grid — added the `New business source` liability column, Ain2 persistence, and warning-only validation save behavior.

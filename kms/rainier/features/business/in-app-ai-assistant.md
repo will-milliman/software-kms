@@ -11,6 +11,7 @@ An integrated chat assistant ("LAPA") inside the Integrate web renderer. Control
 ## Behavior
 
 - When `Features.EnableLapaChatbot` is true (via feature-toggle file), a chat UI appears.
+- The chat iframe fills its toolbox container responsively without fixed-width or negative-offset layout hacks.
 - Users can ask natural-language questions about Integrate features, projects, or models.
 - Disabled by default in `feature-toggles.json` until rollout.
 
@@ -33,3 +34,4 @@ An integrated chat assistant ("LAPA") inside the Integrate web renderer. Control
 
 - 2026-04-21: Seeded.
 - 2026-05-07: PR #9711 Integrate LAPA chat into Toolbox sidebar — LAPA chat is now surfaced in the Toolbox sidebar.
+- 2026-05-13: PR #9797 Remove obsolete Copilot chat fixed-width and iframe padding styles — removed fixed toolbox width and iframe padding hacks now that Copilot Chat is responsive.

@@ -6,12 +6,12 @@
 
 ## Summary
 
-After artifacts publish successfully, the `TagBuild` stage writes the `ApprovedReleaseCandidate` build tag onto the pipeline 799 run. Downstream Classic Releases filter on this tag to find approved candidates.
+After artifacts publish successfully, the `TagBuild` stage writes the configured build tag onto the pipeline run. Production writes `ApprovedReleaseCandidate`; the sandbox pipeline writes `SandboxApprovedReleaseCandidate` so downstream Classic Releases do not treat sandbox runs as approved candidates.
 
 ## Behavior
 
 - Runs on the `ubuntu-latest` Microsoft-hosted agent pool (previously `server`; switched in PR #11 so the script can execute).
-- Single pwsh step: `Write-Host "##vso[build.addbuildtag]ApprovedReleaseCandidate"`.
+- Single pwsh step writes `##vso[build.addbuildtag]$(buildTag)`.
 - Depends on `PublishDeploymentArtifacts` with `condition: succeeded()` — tagging only happens if the artifacts actually exist, which protects downstream consumers.
 
 ## Entry Points
@@ -33,3 +33,4 @@ After artifacts publish successfully, the `TagBuild` stage writes the `ApprovedR
 - 2026-04-21: Seeded.
 - 2026-04-21: PR #11 Switch integrate-release-approvals pipeline job to ubuntu-latest pool (AB#91350) — `TagBuild` stage now runs on `ubuntu-latest` (was agentless `server`) so the tag-emitting pwsh script can execute.
 - 2026-04-22: PR #13 Log all component versions before approvals (AB#91392) — `TagBuild` marked `isSkippable: false`.
+- 2026-05-12: PR #23 Add sandbox pipeline for release approvals workflow — tag emission now uses the `buildTag` variable, enabling `SandboxApprovedReleaseCandidate` for sandbox runs.

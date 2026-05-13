@@ -32,3 +32,4 @@
 - 2026-04-21: Seeded.
 - 2026-05-11: PR #9762 AB#81600 Bump the nunit-non-major group with 2 updates — refreshed NUnit-related test dependencies and assertions in DesktopCore tests.
 - 2026-05-12: PR #9780 AB#81600 Bump the testing-non-major group with 1 update — updated `Microsoft.NET.Test.Sdk` in DesktopCore tests from 18.0.1 to 18.5.1.
+- 2026-05-12: PR #9782 Remove strictPropertyInitialization and suppressImplicitAnyIndexErrors from @repo/store — tightened `@repo/store` TypeScript compiler settings and fixed dynamic-indexing errors in store tests/helpers.

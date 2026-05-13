@@ -34,3 +34,4 @@ The code behind the user-facing toggle system: `FeatureToggleConfig` (.NET) for 
 
 - 2026-04-21: Seeded.
 - 2026-05-11: PR #9673 Update PE to generate model.cmd using dotnet — added a feature toggle for the .NET `model.cmd` generation path.
+- 2026-05-12: PR #9782 Remove strictPropertyInitialization and suppressImplicitAnyIndexErrors from @repo/store — removed store TypeScript looseness that previously hid uninitialized properties and implicit dynamic index access.

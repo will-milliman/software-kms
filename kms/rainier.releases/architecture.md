@@ -16,9 +16,8 @@ flowchart TD
 
     Upstream --> P799[["Pipeline 799<br/>integrate-release-approvals.yaml"]]
 
-    P799 --> S1[SelectReleaseCandidate<br/>ManualValidation]
-    S1 --> S2[InitialApprovals<br/>Dev + QA + Ops + Security]
-    S2 --> S3[PublishDeploymentArtifacts<br/>server-release-body.json<br/>client-release-body.json]
+    P799 --> TPL[Shared stages template]
+    TPL --> S3[PublishDeploymentArtifacts<br/>server-release-body.json<br/>client-release-body.json]
     S3 --> POL[EvaluateReleasePolicies<br/>main branches + Qualys]
     POL --> S4[GatherReleaseApprovals<br/>Dev + QA + Ops + conditional Security]
     S4 --> S5[TagBuild<br/>ApprovedReleaseCandidate]
@@ -32,6 +31,8 @@ flowchart TD
 ## Entry points
 
 - **`.pipelines/integrate-release-approvals.yaml:1`** — root ADO pipeline definition (pipeline 799). Defines `resources.pipelines` for all upstream CI builds and all stages below.
+- **`.pipelines/integrate-release-approvals-sandbox.yaml:1`** — sandbox ADO pipeline definition that references the same resources but disables side-effecting release actions.
+- **`.pipelines/templates/stages/integrate-release-approvals-stages.yaml:1`** — shared implementation template used by production and sandbox pipeline entry points.
 - **`.pipelines/integrate-release-approvals.yaml`** — `EvaluateReleasePolicies` stage runs after release-body artifact publishing and before approvals.
 - **`.pipelines/scripts/Assert-ResourceBranchesAreMain.ps1`** — checks all `RESOURCES_PIPELINE_*_SOURCEBRANCH` values are `refs/heads/main`.
 - **`.pipelines/scripts/Assert-QualysScanPassed.ps1`** — locates the Qualys scan run for the Developer Site resource and gates Security approval based on the result.
@@ -49,12 +50,12 @@ flowchart TD
    - `client-release-body.json` — electron.
    Both are published as ADO build artifacts (`PublishBuildArtifacts@1`) with matching container names.
 4. **Policy enforcement.** `EvaluateReleasePolicies` fails if any pipeline resource did not originate from `refs/heads/main`; it also checks Qualys scan status for the Developer Site run and requires Security approval if the scan is absent or unsuccessful.
-5. **Manual approvals.** Dev, QA, and Ops approvals run after policy checks; Security approval is conditional on the Qualys policy result.
-6. **Tagging.** `TagBuild` emits `##vso[build.addbuildtag]ApprovedReleaseCandidate` so downstream Classic Releases can filter to approved runs.
+5. **Manual approvals.** Dev, QA, and Ops approvals run after policy checks; Security approval is conditional on the Qualys policy result. In sandbox mode, these are replaced by a no-op dummy approval job.
+6. **Tagging.** `TagBuild` emits `##vso[build.addbuildtag]$(buildTag)` so production applies `ApprovedReleaseCandidate` and sandbox applies `SandboxApprovedReleaseCandidate`.
 7. **Customer notification.** `ClientNotification` downloads sources and runs `send-release-notification-email.sh`, which:
    - Parses `email-notification-config.json` (from) and `recipients/release-approvals.json` (to/bcc) via `python3 -c`.
    - Constructs a SendGrid `personalizations` JSON payload (`send-release-notification-email.sh:48–59`).
-   - POSTs to `https://api.sendgrid.com/v3/mail/send` with the `$(send_grid_api_key)` bearer token (line 74).
+    - POSTs to `https://api.sendgrid.com/v3/mail/send` with the `$(send_grid_api_key)` bearer token unless `DRY_RUN=true`.
    - Non-2xx responses exit 1, but the pipeline sets `continueOnError: true` at `integrate-release-approvals.yaml:214`.
 8. **Downstream release dispatch.** A separate Classic Release consumes the approved build, downloads the release-body artifact under the `_Integrate App Approvals` alias, and runs `Invoke-IntegrateRelease.ps1`:
    - Reads the JSON at `$SYSTEM_ARTIFACTSDIRECTORY/_Integrate App Approvals/<type>-release-body/<type>-release-body.json` (`Invoke-IntegrateRelease.ps1:78–82`).
@@ -71,6 +72,8 @@ flowchart TD
 └── .pipelines/
     ├── .gitkeep
     ├── integrate-release-approvals.yaml                -- ADO pipeline 799
+    ├── integrate-release-approvals-sandbox.yaml        -- sandbox entry point
+    ├── templates/stages/integrate-release-approvals-stages.yaml
     └── scripts/
         ├── Invoke-IntegrateRelease.ps1                 -- Classic Release dispatcher
         ├── Assert-ResourceBranchesAreMain.ps1          -- release policy branch provenance check
