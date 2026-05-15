@@ -42,3 +42,5 @@ Customer-facing release notes surfaced inside Integrate (release notes view) and
 - 2026-05-07: PR #9715 chore: make release notes folder look like other doc folders — reorganized the release notes folder to match other documentation folders.
 - 2026-05-11: PR #9716 docs: modernize the RN build tooling and introduce three musketeers — migrated release-note source/build structure while preserving customer-facing PDF output.
 - 2026-05-11: PR #9723 doc: add mmd web deprecation rn — added release-note content announcing MMD web deprecation.
+- 2026-05-15: PR #9812 Update release notes for 2026.5.27 — added customer-facing release notes for release 2026.5.27.
+- 2026-05-15: PR #9818 Refine release notes automation commit message and PR body — automated release-note PR titles now omit redundant build numbers while keeping a linked build reference in the PR/work-item description.

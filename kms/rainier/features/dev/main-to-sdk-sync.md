@@ -38,3 +38,5 @@ A GitHub Action that continuously mirrors the `main` branch into the most recent
 - 2026-05-07: PR #9684 chore: sync main into release/sdk/v0.5.0 — automated sync started for the SDK v0.5 release branch.
 - 2026-05-07: PR #9695 chore: sync main into release/sdk/v0.5.0 — automated SDK v0.5 branch sync.
 - 2026-05-07: PR #9709 chore: sync main into release/sdk/v0.5.0 — automated SDK v0.5 branch sync.
+- 2026-05-15: PR #9766 chore: sync main into release/sdk/v0.5.0 — automated SDK v0.5 branch sync.
+- 2026-05-15: PR #9816 chore: sync main into release/sdk/v0.5.0 — automated SDK v0.5 branch sync.

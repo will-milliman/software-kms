@@ -104,7 +104,7 @@
 ## Build tooling & CI
 
 - **Azure DevOps Pipelines (`vsts/azure-pipelines.yml`, `.pipelines/**`, `monorepo/*/.pipelines/**`, `src/*/vsts/**`)** — dozens of per-service pipelines. Shared job templates at `.pipelines/templates/jobs/{dotnet-build,docker-build}.yml`. See `kms/rainier/features/dev/ci-pipelines.md`.
-- **GitHub Actions:** `.github/workflows/sync-main-to-sdk.yml` syncs `main` into the latest `release/sdk/v*` branch; `.github/workflows/dependabot-auto-merge.yml` automates eligible Dependabot PR approval/auto-merge; Storybook deploys to GitHub Pages.
+- **GitHub Actions:** `.github/workflows/sync-main-to-sdk.yml` syncs `main` into the latest `release/sdk/v*` branch; `.github/workflows/dependabot-auto-merge.yml` automates eligible Dependabot PR approval/auto-merge; `.github/workflows/codeql.yml` runs advanced CodeQL for non-C# languages; Storybook deploys to GitHub Pages.
 - **Coverage:** `azurepipelines-coverage.yml` — 70% diff target.
 - **Cross-repo make:** `shared/make/*.mk` (Three Musketeers: make + docker compose + dotnet).
 - **E2E orchestration:** extensive Playwright stage catalog at `monorepo/desktop/ui/e2e/.pipelines/` (14 stages + app-installer steps).
@@ -121,3 +121,11 @@
 - 2026-05-12: PR #9793 Disable Azure Pipeline storybook deployment and update docs — Storybook publishing moved fully off the Azure Blob pipeline to the GitHub Pages URL.
 - 2026-05-13: PR #9685 feat: migrate all JSX unlocalized strings to `@repo/translations` and promote lint rule to error — UI localization enforcement is now part of the frontend lint baseline.
 - 2026-05-13: PR #9796 feature(dev): allow greater than one directory in dependabot update buckets — Dependabot NuGet update buckets can cover multiple directories.
+- 2026-05-15: PR #9472 Replace DOM anchor-tag downloads with Electron IPC + toast notifications wrapper — UI blob downloads now use a shared store-layer wrapper with Electron IPC and toast/error handling.
+- 2026-05-15: PR #9794 Remove useUnknownInCatchVariables and strictNullChecks from @repo/store — `@repo/store` and `@repo/models` moved closer to strict TypeScript null/catch handling.
+- 2026-05-15: PR #9784 chore: origin drops Microsoft.Bcl.AsyncInterfaces dependency — Origin migrated toward `.slnx` structure and updated storage/toolkit/OpenAPI dependencies while removing `Microsoft.Bcl.AsyncInterfaces`.
+- 2026-05-15: PR #9813 Urllib To 2.7 for CVE — PythonInterop lockfile now pulls `urllib3` 2.7 to address the scanned CVE.
+- 2026-05-15: PR #9826 feat(dev): create codeql configuration yaml — added advanced CodeQL workflow/config coverage.
+- 2026-05-15: PR #9827 Create CodeQL Workflow — non-C# CodeQL legs are active while C# scan timing remains separate.
+- 2026-05-15: PR #9817 Remove strict TypeScript compiler overrides from project-manager — `@repo/project-manager` removed several strict TypeScript override escapes after fixing type errors.
+- 2026-05-15: PR #9830 chore(dependabot) Bump the rainier-servicetoolkit-non-major group with 1 update — `Rainier.ServiceToolkit` dependency updates continued across Rainier components.

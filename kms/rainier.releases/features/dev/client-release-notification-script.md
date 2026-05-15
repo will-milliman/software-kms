@@ -17,7 +17,7 @@ Developer-facing internals of the release-notification email: the bash script, i
 - Builds a SendGrid `personalizations` JSON by tokenizing comma-separated email lists on `IFS=','` and assembling the array manually. `bcc` is only included when non-empty.
 - POSTs to `https://api.sendgrid.com/v3/mail/send` with `Authorization: Bearer $API_KEY`.
 - Captures the HTTP status via `curl -w "\n%{http_code}\n"` and exits non-zero if the status is outside 200–299.
-- Honors `DRY_RUN=true` by logging the constructed payload and skipping the SendGrid `curl` call, used by the sandbox approval pipeline.
+- Honors dry-run mode by logging the constructed payload and skipping the SendGrid `curl` call; dry-run is the default unless `DRY_RUN=false` is explicitly set by the approval pipeline.
 - Echoes the full outgoing JSON payload for debugging (note: recipient emails are logged).
 - Adding a new pipeline → add a new JSON file under `recipients/`. No other code change required.
 
@@ -47,3 +47,4 @@ Developer-facing internals of the release-notification email: the bash script, i
 
 - 2026-04-21: Seeded.
 - 2026-05-12: PR #23 Add sandbox pipeline for release approvals workflow — added `DRY_RUN` support and normalized the release-approvals recipient list for sandbox-safe notification tests.
+- 2026-05-15: PR #24 Remove GridUtils pipeline dependency, Add Policy Gate to release approvals, and Add PR trigger for CI pipeline — changed dry-run handling to safe-by-default and updated notifier README documentation.

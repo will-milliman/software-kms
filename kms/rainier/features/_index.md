@@ -46,6 +46,7 @@ Build, CI, tooling, internal developer experience.
 | Feature | Summary |
 |---|---|
 | [CI Pipelines (Azure DevOps)](dev/ci-pipelines.md) | Per-service, per-subproject Azure DevOps pipelines with shared templates. |
+| [Advanced CodeQL Analysis](dev/advanced-codeql-analysis.md) | GitHub Actions CodeQL scanning for non-C# languages while C# timing is evaluated separately. |
 | [Shared Pipeline Templates](dev/shared-pipeline-templates.md) | Reusable `dotnet-build.yml` and `docker-build.yml` job templates. |
 | [Playwright E2E Orchestration](dev/playwright-e2e-orchestration.md) | 14-stage E2E test catalog with app-installer steps for Electron app. |
 | [Playwright CLI Skill (AI-assisted)](dev/playwright-cli-skill.md) | `.github/skills/playwright-cli` — AI attaches to running Electron app via CDP. |

@@ -10,7 +10,7 @@
 
 ## Behavior
 
-- `trigger: none` + `pr: none` — the pipeline is never triggered by code changes; only by `resources.pipelines` completion events.
+- Production remains driven by upstream pipeline resources; the CI entry point also has PR validation for approval workflow changes.
 - Run name format: `$(Date:yyyyMM).$(Rev:r) (<electron run name>)` so runs are keyed off monthly cadence and the Electron version under approval.
 - Stages, in order:
   1. `LogComponentVersions` — `ubuntu-latest`; prints the run names of all seven component pipelines (Integrate App, GridUtils, Origin API, ACL, Initializers, Developer Site, Developer Desktop) for traceability.
@@ -21,14 +21,15 @@
   6. `TagBuild` — `ubuntu-latest`, `isSkippable: false`; logs `##vso[build.addbuildtag]ApprovedReleaseCandidate`.
   7. `ClientNotification` — `ubuntu-latest`, `isSkippable: false`; runs the SendGrid bash script with `continueOnError: true`.
 - Release artifact publishing is consolidated into the approvals flow so downstream stages consume the same generated release body artifacts.
-- Production and sandbox entry points delegate to `.pipelines/templates/stages/integrate-release-approvals-stages.yaml`; sandbox mode replaces manual approvals with a dummy job, uses `SandboxApprovedReleaseCandidate`, skips real email sends with `DRY_RUN=true`, and stubs release-note PR creation.
+- Production and CI entry points delegate to `.pipelines/templates/stages/integrate-release-approvals-stages.yaml`; CI mode replaces manual approvals with a dummy job, uses `SandboxApprovedReleaseCandidate`, skips real email sends with `DRY_RUN=true`, and stubs release-note PR creation.
 - Approval timeouts are parameterized and evaluated with Azure DevOps runtime expression syntax.
 - SendGrid credentials are read from Azure Key Vault into a secret pipeline variable before notification email steps.
+- A Release Policy Gate deployment stage runs as part of the approval workflow to keep release policy evaluation explicit.
 
 ## Entry Points
 
 - `.pipelines/integrate-release-approvals.yaml:1` — pipeline root.
-- `.pipelines/integrate-release-approvals-sandbox.yaml:1` — sandbox pipeline root.
+- `.pipelines/integrate-release-approvals-ci.yaml:1` — CI pipeline root for PR validation/dry-runs.
 - `.pipelines/templates/stages/integrate-release-approvals-stages.yaml:1` — shared stage template with production/sandbox behavior switches.
 - `.pipelines/integrate-release-approvals.yaml:56` — `stages:` block.
 - `.pipelines/scripts/Assert-ResourceBranchesAreMain.ps1` — fails the policy stage when any upstream pipeline resource did not originate from `refs/heads/main`.
@@ -61,3 +62,4 @@
 - 2026-05-07: PR #21 Fetch SendGrid API key from key vault — release notification pipeline now retrieves the SendGrid API key from Azure Key Vault as a secret variable.
 - 2026-05-12: PR #20 feat: add policy enforcement — added release policy evaluation for main-branch resource provenance and Developer Site Qualys scan status before approvals.
 - 2026-05-12: PR #23 Add sandbox pipeline for release approvals workflow — extracted the approval flow into a shared stage template and added a sandbox entry point with dummy approvals, dry-run email, sandbox tagging, and release-note PR stubbing.
+- 2026-05-15: PR #24 Remove GridUtils pipeline dependency, Add Policy Gate to release approvals, and Add PR trigger for CI pipeline — removed GridUtils as an approval resource, renamed sandbox terminology to CI, added PR validation, and introduced a Release Policy Gate deployment stage.

@@ -6,7 +6,6 @@
 flowchart TD
     subgraph Upstream["Upstream CI builds (mgalfadev/Rainier)"]
         E[Rainier.Electron 177]
-        G[GridUtils 196]
         O[Rainier.Origin API 225]
         A[Rainier.ACL 447]
         I[integrate.Initializers 471]
@@ -31,7 +30,7 @@ flowchart TD
 ## Entry points
 
 - **`.pipelines/integrate-release-approvals.yaml:1`** — root ADO pipeline definition (pipeline 799). Defines `resources.pipelines` for all upstream CI builds and all stages below.
-- **`.pipelines/integrate-release-approvals-sandbox.yaml:1`** — sandbox ADO pipeline definition that references the same resources but disables side-effecting release actions.
+- **`.pipelines/integrate-release-approvals-ci.yaml:1`** — CI ADO pipeline definition that references the same resources but disables side-effecting release actions.
 - **`.pipelines/templates/stages/integrate-release-approvals-stages.yaml:1`** — shared implementation template used by production and sandbox pipeline entry points.
 - **`.pipelines/integrate-release-approvals.yaml`** — `EvaluateReleasePolicies` stage runs after release-body artifact publishing and before approvals.
 - **`.pipelines/scripts/Assert-ResourceBranchesAreMain.ps1`** — checks all `RESOURCES_PIPELINE_*_SOURCEBRANCH` values are `refs/heads/main`.
@@ -43,15 +42,15 @@ flowchart TD
 
 ## Data flow
 
-1. **Upstream triggers.** Any tagged `IndividualCI` build of Electron, DeveloperSite, or DeveloperDesktop — or any main-branch build of GridUtils, Origin, ACL, or Initializers — triggers pipeline 799 (`integrate-release-approvals.yaml:9–51`).
+1. **Upstream triggers.** Any tagged `IndividualCI` build of Electron, DeveloperSite, or DeveloperDesktop — or any main-branch build of Origin, ACL, or Initializers — triggers pipeline 799.
 2. **Manual candidate selection.** Authoring and Governance accepts or rejects the candidate in `SelectReleaseCandidate` (timeout 30 days, `onTimeout: reject`).
 3. **Artifact synthesis.** `PublishDeploymentArtifacts` writes two JSON documents containing the resolved upstream `runName` values under `resources.pipelines.*.version`:
    - `server-release-body.json` — origin, acl, initializers, developersite, developerdesktop.
    - `client-release-body.json` — electron.
    Both are published as ADO build artifacts (`PublishBuildArtifacts@1`) with matching container names.
 4. **Policy enforcement.** `EvaluateReleasePolicies` fails if any pipeline resource did not originate from `refs/heads/main`; it also checks Qualys scan status for the Developer Site run and requires Security approval if the scan is absent or unsuccessful.
-5. **Manual approvals.** Dev, QA, and Ops approvals run after policy checks; Security approval is conditional on the Qualys policy result. In sandbox mode, these are replaced by a no-op dummy approval job.
-6. **Tagging.** `TagBuild` emits `##vso[build.addbuildtag]$(buildTag)` so production applies `ApprovedReleaseCandidate` and sandbox applies `SandboxApprovedReleaseCandidate`.
+5. **Manual approvals.** Dev, QA, and Ops approvals run after policy checks; Security approval is conditional on the Qualys policy result. In CI mode, these are replaced by a no-op dummy approval job.
+6. **Tagging.** `TagBuild` emits `##vso[build.addbuildtag]$(buildTag)` so production applies `ApprovedReleaseCandidate` and CI/dry-run applies `SandboxApprovedReleaseCandidate`.
 7. **Customer notification.** `ClientNotification` downloads sources and runs `send-release-notification-email.sh`, which:
    - Parses `email-notification-config.json` (from) and `recipients/release-approvals.json` (to/bcc) via `python3 -c`.
    - Constructs a SendGrid `personalizations` JSON payload (`send-release-notification-email.sh:48–59`).
@@ -72,7 +71,7 @@ flowchart TD
 └── .pipelines/
     ├── .gitkeep
     ├── integrate-release-approvals.yaml                -- ADO pipeline 799
-    ├── integrate-release-approvals-sandbox.yaml        -- sandbox entry point
+    ├── integrate-release-approvals-ci.yaml             -- CI/dry-run entry point
     ├── templates/stages/integrate-release-approvals-stages.yaml
     └── scripts/
         ├── Invoke-IntegrateRelease.ps1                 -- Classic Release dispatcher

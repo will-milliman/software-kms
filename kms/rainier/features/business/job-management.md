@@ -13,7 +13,7 @@ View job history, drill into job details, pick a folder for results, and perform
 - Job History view lists recent jobs with status, duration, user, and results.
 - Drilling in shows projection-level detail.
 - Folder picker lets users stage output destinations.
-- Batched download endpoint supports bulk export of multiple job results.
+- Batched download endpoint supports bulk export of multiple job results; UI-triggered blob downloads use the shared store-layer Electron IPC + toast wrapper.
 - Running cloud jobs and local jobs both appear in one unified list.
 
 ## Entry Points
@@ -38,3 +38,4 @@ View job history, drill into job details, pick a folder for results, and perform
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-15: PR #9472 Replace DOM anchor-tag downloads with Electron IPC + toast notifications wrapper — job result downloads now flow through a shared download wrapper with toast/error handling instead of direct DOM anchor downloads.

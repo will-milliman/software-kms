@@ -17,6 +17,7 @@ When a new Integrate app version is approved for release, the approval pipeline 
 - **Subject:** `Milliman - Integrate App Release Available (<electron version>)` where the version equals the approved `Rainier.Electron` run name.
 - **Body (plain text):** addressed to "Dear Integrate Customer", announces the new version, directs to the admin portal for release notes and the support portal / `support@integrate-solutions.com` for help, signed by "Milliman Life Technology Solutions Cloud Service Desk".
 - Delivery failures do **not** block the release (`continueOnError: true`), but non-2xx responses surface the SendGrid error payload in the job log.
+- Dry-run behavior defaults to safe mode unless the pipeline explicitly sets `DRY_RUN=false`, preventing accidental email sends during CI/dry-runs.
 
 ## Entry Points
 
@@ -40,3 +41,4 @@ When a new Integrate app version is approved for release, the approval pipeline 
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-15: PR #24 Remove GridUtils pipeline dependency, Add Policy Gate to release approvals, and Add PR trigger for CI pipeline — hardened notification dry-run defaults so emails only send when explicitly enabled.

@@ -37,3 +37,4 @@ Repo-internal documentation trees: `docs/decisions/` (Architecture Decision Reco
 - 2026-05-12: PR #9765 fix: ab link adding workflow does not run on PR edit — corrected Dependabot ignore syntax and changed AB-link insertion so the work item stays at the top of edited PR bodies.
 - 2026-05-12: PR #9767 fix: try greater than or equal instead of inclusive range — converted Dependabot version caps to `>=` constraints for AutoMapper, MediatR, and FluentAssertions.
 - 2026-05-13: PR #9796 feature(dev): allow greater than one directory in dependabot update buckets — updated generated Dependabot config/docs for multi-directory NuGet update buckets and org-level registry configuration.
+- 2026-05-15: PR #9766 chore: sync main into release/sdk/v0.5.0 — carried Dependabot architecture and management docs into the SDK release branch.

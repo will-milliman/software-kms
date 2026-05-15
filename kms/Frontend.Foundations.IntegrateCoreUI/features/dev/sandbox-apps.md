@@ -10,10 +10,10 @@
 
 ## Behavior
 
-- **`sandbox-01`** — Frame + Theme Builder showcase (React 19 + Vite + styled-components + React Compiler). Single-page, no router. Dev `:4200`, preview `:4300/IntegrateCoreUiNext/web/sandbox-01`. Consumes `cookie-consent`, `frame`, `grid`, `modal`, `store`, `themes`.
+- **`sandbox-01`** — Frame + Theme Builder showcase (React 19 + Vite + styled-components + React Compiler). Single-page, no router. Dev `:4200`; GitHub Pages production build uses relative asset paths. Consumes `cookie-consent`, `frame`, `grid`, `modal`, `store`, `themes`.
 - **`sandbox-tenant-manager`** — Full IDM admin SPA (Redux Toolkit + RTK Query + TanStack Router + MSW + Playwright). Dev `:4201`, preview `:4301/IntegrateCoreUiNext/web/tenant-manager/`. Consumes `frame`, `grid`, `modal`, `store`, `themes`.
 - **`sandbox-idm-adapter`** — Express static + stub-API host on port 3001 that serves the pre-built legacy AngularJS 1.5 IDM SPA from `dist/packages/idm-adapter`, exposing per-module scripts and stubbing the IDM/project APIs. Not a React app.
-- None of the sandboxes are Module Federation hosts or remotes today; they're independent SPAs under a shared `/IntegrateCoreUiNext/web/<name>` base path in production.
+- None of the sandboxes are Module Federation hosts or remotes today; they're independent SPAs. `sandbox-01` is deployed from GitHub Actions to GitHub Pages, while the remaining static-site deployment model remains pipeline-driven.
 - Only `sandbox-tenant-manager` has Vitest + Playwright; sandbox-01 has Vitest unit specs (theme-builder); sandbox-idm-adapter has none.
 
 ## Entry Points
@@ -43,3 +43,5 @@
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-15: PR #178 Add GitHub Actions workflow to deploy sandbox-01 to GitHub Pages — moved sandbox-01 deployment out of the Azure deploy pipeline and into GitHub Pages.
+- 2026-05-15: PR #181 Add GitHub Actions workflow to deploy sandbox-01 to GitHub Pages — changed sandbox-01 to use relative Vite asset paths for GitHub Pages root hosting.

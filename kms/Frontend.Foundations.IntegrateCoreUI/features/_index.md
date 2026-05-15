@@ -32,6 +32,7 @@
 | ADO Deploy Pipeline | [dev/ado-deploy-pipeline.md](dev/ado-deploy-pipeline.md) | `pipelines/deploy.yml` — publish to `rainier-latest` feed and Azure Blob. |
 | Publish Feed Script | [dev/publish-feed-script.md](dev/publish-feed-script.md) | `tools/publish-feed.ts` — idempotent `npm publish` wrapper. |
 | Dependabot | [dev/dependabot.md](dev/dependabot.md) | Weekly npm updates across workspace directories. |
+| Agent Tools | [dev/agent-tools.md](dev/agent-tools.md) | `@integrate-core-ui/agent-tools` — LLM tool manifests and executor hook for tabbed resources and toolbox stores. |
 | Husky + lint-staged | [dev/husky-lintstaged.md](dev/husky-lintstaged.md) | Pre-commit ESLint, Prettier, and repo-wide typecheck. |
 | Playwright CLI Agent Skill | [dev/playwright-cli-skill.md](dev/playwright-cli-skill.md) | `.agents/skills/playwright-cli/` — agent playbook for browser-driven frontend validation. |
 | Sandbox Apps | [dev/sandbox-apps.md](dev/sandbox-apps.md) | `apps/web/*` — three demo hosts exercising the shared libraries. |

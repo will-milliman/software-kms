@@ -6,13 +6,13 @@
 
 ## Summary
 
-The `resources.pipelines` block declares the seven Rainier component CI pipelines that both trigger an approval run **and** supply the `version` values baked into the release-body artifacts.
+The `resources.pipelines` block declares the Rainier component CI pipelines that both trigger an approval run **and** supply the `version` values baked into the release-body artifacts.
 
 ## Behavior
 
 - Each entry specifies `pipeline: <alias>`, `source: <ADO pipeline name>`, and a `trigger` block with `branches: [main]` and optionally `tags: [IndividualCI]`.
 - Alias is what the YAML references via `$(resources.pipeline.<alias>.runName)` (e.g. in the release-body pwsh steps and the pipeline run name).
-- Client-side components (`electron_resource`, `developer_site_resource`, `developer_desktop_resource`) require the `IndividualCI` tag to trigger; server-side components (`grid_utils_resource`, `origin_resource`, `acl_resource`, `initializers_resource`) trigger on any main-branch build.
+- Client-side components (`electron_resource`, `developer_site_resource`, `developer_desktop_resource`) require the `IndividualCI` tag to trigger; server-side components (`origin_resource`, `acl_resource`, `initializers_resource`) trigger on any main-branch build.
 - The full mapping is documented in `domain.md` → "Pipeline resources".
 - Source pipelines live in the cross-project ADO project `mgalfadev/Rainier`; definition IDs are captured as YAML comments next to each entry.
 
@@ -20,12 +20,7 @@ The `resources.pipelines` block declares the seven Rainier component CI pipeline
 
 - `.pipelines/integrate-release-approvals.yaml:9` — `resources:` block.
 - `.pipelines/integrate-release-approvals.yaml:11` — `electron_resource`.
-- `.pipelines/integrate-release-approvals.yaml:18` — `grid_utils_resource`.
-- `.pipelines/integrate-release-approvals.yaml:23` — `origin_resource`.
-- `.pipelines/integrate-release-approvals.yaml:28` — `acl_resource`.
-- `.pipelines/integrate-release-approvals.yaml:33` — `initializers_resource`.
-- `.pipelines/integrate-release-approvals.yaml:38` — `developer_site_resource`.
-- `.pipelines/integrate-release-approvals.yaml:45` — `developer_desktop_resource`.
+- `.pipelines/integrate-release-approvals.yaml` — `origin_resource`, `acl_resource`, `initializers_resource`, `developer_site_resource`, and `developer_desktop_resource`.
 
 ## Key Dependencies
 
@@ -40,3 +35,4 @@ The `resources.pipelines` block declares the seven Rainier component CI pipeline
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-15: PR #24 Remove GridUtils pipeline dependency, Add Policy Gate to release approvals, and Add PR trigger for CI pipeline — removed GridUtils from release approval pipeline resources/triggers.

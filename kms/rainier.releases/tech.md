@@ -21,7 +21,6 @@ No compiled code, tests, or package manifests are present. The repo is pure IaC 
 - **SendGrid Mail Send API** (`https://api.sendgrid.com/v3/mail/send`) — delivers the customer-facing release notification email. Authenticated with a `send_grid_api_key` ADO secret variable.
 - **Azure DevOps pipeline resources** (cross-project `mgalfadev/Rainier`):
   - `Rainier.Electron Pipeline` (definition 177) — client component, trigger tag `IndividualCI`.
-  - `GridUtils CI Build` (definition 196).
   - `Rainier.Origin API` (definition 225).
   - `Rainier.ACL` (definition 447).
   - `integrate.Initializers` (definition 471).
@@ -38,7 +37,7 @@ No compiled code, tests, or package manifests are present. The repo is pure IaC 
 
 - **No CI workflows under `.github/workflows/`.** There is no `.github` directory at the repo root. The repo is consumed by Azure DevOps pipelines, not GitHub Actions.
 - **`.pipelines/integrate-release-approvals.yaml`** — production pipeline definition. Registered in ADO as pipeline **799** ("Integrate App Approvals").
-- **`.pipelines/integrate-release-approvals-sandbox.yaml`** — sandbox pipeline entry point for dry-running the approval workflow.
+- **`.pipelines/integrate-release-approvals-ci.yaml`** — CI/dry-run pipeline entry point with PR validation.
 - **`.pipelines/templates/stages/integrate-release-approvals-stages.yaml`** — shared production/sandbox stage implementation.
 - **`.pipelines/scripts/Assert-ResourceBranchesAreMain.ps1`** and **`Assert-QualysScanPassed.ps1`** — release policy enforcement helpers used by the approval pipeline.
 - **Pipeline variables required in ADO UI:**
@@ -53,3 +52,4 @@ No compiled code, tests, or package manifests are present. The repo is pure IaC 
 ## Change Log
 
 - 2026-05-12: PR #23 Add sandbox pipeline for release approvals workflow — introduced the shared approval stages template and sandbox pipeline with dry-run notification/release-note behavior.
+- 2026-05-15: PR #24 Remove GridUtils pipeline dependency, Add Policy Gate to release approvals, and Add PR trigger for CI pipeline — removed the GridUtils pipeline resource, renamed the sandbox entry point to CI, added PR validation, and made notification dry-run behavior safe by default.

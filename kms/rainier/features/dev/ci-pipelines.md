@@ -14,6 +14,7 @@ Per-service, per-subproject Azure DevOps YAML pipelines build, test, pack, and p
 - Build/test/pack/publish stages share logic via [Shared Pipeline Templates](shared-pipeline-templates.md).
 - Pipelines publish NuGet packages to internal feeds (`central`, `milliman`, `rainier-latest`) and artifacts to pipeline storage for downstream consumption.
 - Coverage is gated by [Code Coverage Threshold](code-coverage-threshold.md).
+- Projection Execution and SDK build schedules are maintained in YAML so release cadence can be adjusted independently of code changes.
 
 ## Entry Points
 
@@ -35,3 +36,6 @@ Per-service, per-subproject Azure DevOps YAML pipelines build, test, pack, and p
 ## Change Log
 
 - 2026-04-21: Seeded.
+- 2026-05-15: PR #9819 Update Build Schedule — adjusted Projection Execution and SDK pipeline schedules.
+- 2026-05-15: PR #9826 feat(dev): create codeql configuration yaml — added a GitHub Actions CodeQL workflow/config as a complement to existing Azure DevOps CI.
+- 2026-05-15: PR #9827 Create CodeQL Workflow — refined advanced CodeQL scanning to exclude C# until timing data is available.

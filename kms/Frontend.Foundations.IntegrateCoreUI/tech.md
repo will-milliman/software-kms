@@ -52,18 +52,26 @@
 - **ADO npm feed `rainier-latest`** — publication target for `@integrate-core-ui/*` packages (`pipelines/deploy.yml:75-76`).
 - **Azure Blob Storage** deploy targets:
   - `ltssharedassets` / `$web` / `IntegrateCoreUiNext/storybook/` → Storybook host.
-  - `ltssharedassets` / `$web` / `IntegrateCoreUiNext/web/<site-id>/` → sandbox apps (e.g., `sandbox-01`, `tenant-manager`).
+  - `ltssharedassets` / `$web` / `IntegrateCoreUiNext/web/<site-id>/` → pipeline-deployed sandbox apps such as tenant-manager.
   - `legalassets` / `$web` → `cookie-consent` UMD bundle.
 - **Verdaccio 6.1.2** — local npm proxy/registry at `http://localhost:4873/` for publish-flow dry runs (`.verdaccio/`).
 - **Milliman Gateway** (`https://milliman.gateway`) — bearer-token API backend consumed by `sandbox-tenant-manager` RTK Query (`apps/web/sandbox-tenant-manager/src/store/store.ts:20`). Tenant-manager API prefix: `/api/services/tenant-manager/`.
 
 ## CI / CD
 
-- **Azure DevOps Pipelines** (not GitHub Actions) under `pipelines/`:
+- **Azure DevOps Pipelines** under `pipelines/`:
   - `validate.yml` — triggered on `main`. Three jobs: `FE_Validate` (install, build, lint, typecheck, test on ubuntu), `E2E_Validate` (Playwright E2E on windows, publishes `E2E_Playwright_Report` artifact), `IdmAdapter_Validate` (separate npm build for the legacy adapter on ubuntu).
-  - `deploy.yml` — pipeline-resource-triggered on successful `validate` against `main`. Three stages: `Publish_IntegrateCoreUiNext` (publish packages to `rainier-latest`), `Deploy_Static_Webpages` (Storybook + sandbox-01 to `ltssharedassets`), `Deploy_CookieConsent` (UMD to `legalassets`). All gated on `Build.Reason == ResourceTrigger` + `refs/heads/main`.
-- **Dependabot** — weekly npm updates across 12 workspace directories (`.github/dependabot.yml`). Omits `cookie-consent`, `federation`, and `idm-adapter`.
-- **No GitHub Actions workflows** present; `.github/` only holds Dependabot config.
+  - `deploy.yml` — pipeline-resource-triggered on successful `validate` against `main`. Stages publish packages to `rainier-latest`, deploy Storybook/static Azure assets, and deploy the cookie-consent UMD to `legalassets`; sandbox-01 deployment moved to GitHub Pages.
+- **GitHub Actions** — `.github/workflows/deploy-sandbox-01.yml` builds and deploys sandbox-01 to GitHub Pages on pushes to `main`.
+- **Dependabot** — monthly npm updates across workspace directories (`.github/dependabot.yml`). Omits `cookie-consent`, `federation`, and `idm-adapter`; explicitly ignores `@integrate-core-ui/idm-adapter`.
+
+## Change Log
+
+- 2026-05-15: PR #177 feat: add @integrate-core-ui/agent-tools package for LLM tool integration — added an ESM-only Vite package with tool manifests and executor hook.
+- 2026-05-15: PR #178 Add GitHub Actions workflow to deploy sandbox-01 to GitHub Pages — added GitHub Pages deployment for sandbox-01 and removed its Azure deploy step.
+- 2026-05-15: PR #179 chore: update Dependabot configuration — Dependabot moved to monthly npm updates and ignores `@integrate-core-ui/idm-adapter`.
+- 2026-05-15: PR #180 refactor: simplify auth manager renewal flow — auth package API and internals now center on `AuthManager` renewal and typed response metadata.
+- 2026-05-15: PR #181 Add GitHub Actions workflow to deploy sandbox-01 to GitHub Pages — sandbox-01 Vite assets now resolve through a relative base path on GitHub Pages.
 
 ## Key root config files
 

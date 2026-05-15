@@ -2,7 +2,7 @@
 
 ## Glossary
 
-- **Integrate app** — the Rainier product whose releases this repo governs. Composed of a client tier (Electron desktop app) and a server tier (Origin API, ACL, Initializers, Developer Site, Developer Desktop, GridUtils).
+- **Integrate app** — the Rainier product whose releases this repo governs. Composed of a client tier (Electron desktop app) and a server tier (Origin API, ACL, Initializers, Developer Site, Developer Desktop).
 - **Release candidate (RC)** — a specific upstream CI build selected for release. Once approved, the build is tagged `ApprovedReleaseCandidate` so the Classic Release engine can discover it.
 - **Authoring and Governance** — the Milliman team that owns the repo and the "Select Release Candidate" gate. Mapped to ADO group `[Rainier]\Authoring and Governance` and GitHub team `@milliman-lts/authoring-and-governance`.
 - **Approvers (Integrate App / QA / Ops)** — ADO groups `[Rainier]\Approvers - Integrate App`, `[Rainier]\Approvers - QA`, `[Rainier]\Approvers - Ops` that must sign off in `InitialApprovals`. Security is gated by `[Rainier]\Security Team`.
@@ -20,7 +20,6 @@
 | Alias | ADO source | Trigger branches | Trigger tags |
 |---|---|---|---|
 | `electron_resource` | Rainier.Electron Pipeline (177) | main | IndividualCI |
-| `grid_utils_resource` | GridUtils CI Build (196) | main | — |
 | `origin_resource` | Rainier.Origin API (225) | main | — |
 | `acl_resource` | Rainier.ACL (447) | main | — |
 | `initializers_resource` | integrate.Initializers (471) | main | — |
